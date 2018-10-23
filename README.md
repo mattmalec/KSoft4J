@@ -6,7 +6,7 @@ Java wrapper for the KSoft API
 # Getting started
 
 You can add the KSoft4J wrapper to your project using Gradle.
-```
+```gradle
 repositories {
     jcenter()
 }

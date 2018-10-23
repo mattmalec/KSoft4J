@@ -1,21 +1,113 @@
 plugins {
-    id 'java'
-    id 'com.github.johnrengelman.shadow' version '2.0.2'
+    id 'com.jfrog.bintray' version '1.8.4'
+	id 'com.github.johnrengelman.shadow' version '2.0.2'
+	id 'java'
+	id 'maven'
+}
+version '1.0'
+ext {
+    bintrayRepo = 'KSoft4J'
+    bintrayName = 'KSoft4J'
+
+    publishedGroupId = 'net.explodingbush.KSoft4J'
+    libraryName = 'KSoft4J'
+    artifact = 'KSoft4J'
+
+    libraryDescription = 'Java wrapper for the KSoftAPI'
+
+    siteUrl = 'https://github.com/mjmalec/KSoft4J'
+    gitUrl = 'https://github.com/mjmalec/KSoft4J.git'
+
+    libraryVersion = '1.0'
+
+    developerId = 'mjmalec'
+    developerName = 'Matt Malec'
+    developerEmail = 'matt@mattmalec.com'
+
+    licenseName = 'GNU General Public License v3.0'
+    licenseUrl = 'https://www.gnu.org/licenses/gpl-3.0.txt'
+    allLicenses = ["AGPL-V3"]
+}
+group = publishedGroupId
+version = libraryVersion
+
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            packaging 'aar'
+            groupId publishedGroupId
+            artifactId artifact
+
+            name libraryName
+            description libraryDescription
+            url siteUrl
+
+            licenses {
+                license {
+                    name licenseName
+                    url licenseUrl
+                }
+            }
+            developers {
+                developer {
+                    id developerId
+                    name developerName
+                    email developerEmail
+                }
+            }
+            scm {
+                connection gitUrl
+                developerConnection gitUrl
+                url siteUrl
+            }
+        }
+    }
 }
 
-version '1.0-SNAPSHOT'
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from System.getProperty("java.class.path")
+}
 
-sourceCompatibility = 1.8
+artifacts {
+    archives sourcesJar
+}
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+
+    configurations = ['archives']
+    pkg {
+        repo = bintrayRepo
+        name = bintrayName
+        desc = libraryDescription
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = allLicenses
+        dryRun = false
+        publish = true
+        override = false
+        publicDownloadNumbers = true
+        version {
+            desc = libraryDescription
+        }
+    }
+}
+
 
 repositories {
     mavenCentral()
-	jcenter()
+    jcenter()
 }
 
 dependencies {
-	compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.6.1'
-	compile 'com.squareup.okhttp3:okhttp:3.11.0'
-	compile group: 'org.json', name: 'json', version: '20160810'
+    compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.6.1'
+    compile 'com.squareup.okhttp3:okhttp:3.11.0'
+    compile group: 'org.json', name: 'json', version: '20160810'
 }
 jar {
     manifest {

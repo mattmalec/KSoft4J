@@ -136,7 +136,7 @@ For general troubleshooting, you can view some troubleshooting steps in the exam
 ## Documentation
 The docs will have everything you need to know in order to use the wrapper.
 
-[KSoft4J Docs](https://api.explodingbush/ksoft4j) can be found here.
+[KSoft4J Docs](https://api.explodingbush.net/ksoft4j) can be found here.
 It should be reletively easy to understand. If you have any questions regarding the documentation, please don't hesitate to contact me on Discord.
 
 ## Contributing to KSoft4J

@@ -1,8 +1,6 @@
 # KSoft4J
 Java wrapper for the KSoft API
 
-[ ![Download](https://api.bintray.com/packages/mattmalec/KSoft4J/KSoft4J/images/download.svg?version=1.0) ](https://bintray.com/mattmalec/KSoft4J/KSoft4J/1.0/link)
-
 ## Creating the KSoftAPI Object
 
 You can create the KSoftAPI object by creating a new instance of `KSoftAPI` and passing the token.

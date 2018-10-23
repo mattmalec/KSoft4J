@@ -126,7 +126,7 @@ repositories {
 }
 ```
 
-The builds are distributed using JCenter through Bintray [JDA JCenter Bintray](https://bintray.com/mattmalec/KSoft4J/KSoft4J)
+The builds are distributed using JCenter through Bintray [KSoft4J JCenter Bintray](https://bintray.com/mattmalec/KSoft4J/KSoft4J)
 
 ## Getting Help
 

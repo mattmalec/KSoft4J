@@ -6,11 +6,11 @@ import net.explodingbush.ksoftapi.entities.TaggedImageAction;
 import net.explodingbush.ksoftapi.entities.WikihowAction;
 import net.explodingbush.ksoftapi.enums.ImageTag;
 import net.explodingbush.ksoftapi.enums.ImageType;
+import  net.explodingbush.ksoftapi.enums.Routes;
 
 public class KSoftAPI {
 
     private final String token;
-    private final String REDDIT_URL = "https://api.ksoft.si/meme/";
     private String request;
 
     public KSoftAPI(String token) {

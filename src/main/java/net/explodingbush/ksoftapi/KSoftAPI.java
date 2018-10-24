@@ -26,16 +26,16 @@ public class KSoftAPI {
     public RedditAction getRedditImage(ImageType type) {
         switch (type) {
             case RANDOM_MEME:
-                this.request = REDDIT_URL + "random-meme";
+                this.request = REDDIT + "random-meme";
                 break;
             case RANDOW_AWW:
-                this.request = REDDIT_URL + "random-aww";
+                this.request = REDDIT + "random-aww";
                 break;
             case RANDOM_NSFW:
-                this.request = REDDIT_URL + "random-nsfw";
+                this.request = REDDIT + "random-nsfw";
                 break;
             case RANDOM_REDDIT:
-                this.request = REDDIT_URL + "rand-reddit";
+                this.request = REDDIT + "rand-reddit";
         }
         return new RedditAction(token, type, request);
     }

@@ -3,6 +3,8 @@ package net.explodingbush.ksoftapi.entities.impl;
 import net.explodingbush.ksoftapi.entities.AddBan;
 import net.explodingbush.ksoftapi.entities.BanAction;
 import net.explodingbush.ksoftapi.exceptions.MissingArgumentException;
+import net.explodingbush.ksoftapi.utils.Checks;
+
 import org.json.JSONObject;
 
 public class AddBanImpl implements AddBan {
@@ -11,36 +13,42 @@ public class AddBanImpl implements AddBan {
 
     @Override
     public AddBan setUserId(String user) {
+    	Checks.notNull(user, "user");
         json.put("user", user);
         return this;
     }
 
     @Override
     public AddBan setModeratorId(String moderatorId) {
+    	Checks.notNull(moderatorId, "moderatorId");
         json.put("mod", moderatorId);
         return this;
     }
 
     @Override
     public AddBan setUsername(String userName) {
+    	Checks.notNull(userName, "userName");
         json.put("user_name", userName);
         return this;
     }
 
     @Override
     public AddBan setDiscriminator(String discriminator) {
+    	Checks.notNull(discriminator, "discriminator");
         json.put("user_discriminator", discriminator);
         return this;
     }
 
     @Override
     public AddBan setReason(String reason) {
+    	Checks.notNull(reason, "reason");
         json.put("reason", reason);
         return this;
     }
 
     @Override
     public AddBan setProof(String proof) {
+    	Checks.notNull(proof, "proof");
         json.put("proof", proof);
         return this;
     }

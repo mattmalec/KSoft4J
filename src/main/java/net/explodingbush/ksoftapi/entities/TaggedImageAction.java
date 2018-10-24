@@ -1,9 +1,11 @@
 package net.explodingbush.ksoftapi.entities;
 
 import net.explodingbush.ksoftapi.enums.ImageTag;
+import net.explodingbush.ksoftapi.enums.Routes;
 import net.explodingbush.ksoftapi.KSoftAction;
 import net.explodingbush.ksoftapi.entities.impl.TaggedImageImpl;
 import net.explodingbush.ksoftapi.exceptions.LoginException;
+import net.explodingbush.ksoftapi.utils.Checks;
 import net.explodingbush.ksoftapi.utils.JSONBuilder;
 import org.json.JSONObject;
 
@@ -15,6 +17,8 @@ public class TaggedImageAction implements KSoftAction<TaggedImage> {
     private boolean allowNsfw = false;
 
     public TaggedImageAction(String token, ImageTag tag) {
+    	Checks.notNull(token, "token");
+    	Checks.notNull(tag, "tag");
         this.token = token;
         this.tag = tag;
     }
@@ -39,7 +43,7 @@ public class TaggedImageAction implements KSoftAction<TaggedImage> {
      * If the token is not provided or incorrect.
      */
     public TaggedImage execute() {
-        json = new JSONBuilder().requestKsoft("https://api.ksoft.si/images/random-image?tag=" + tag.name().toLowerCase() + "&nsfw=" + String.valueOf(allowNsfw), token);
+        json = new JSONBuilder().requestKsoft(String.format(Routes.IMAGE.toString(), tag.name().toLowerCase(), String.valueOf(allowNsfw)), token);
         if (token.isEmpty() || !json.isNull("detail") && json.getString("detail").equalsIgnoreCase("Invalid token.")) {
             throw new LoginException();
         }

@@ -6,6 +6,7 @@ import net.explodingbush.ksoftapi.entities.TaggedImageAction;
 import net.explodingbush.ksoftapi.entities.WikihowAction;
 import net.explodingbush.ksoftapi.enums.ImageTag;
 import net.explodingbush.ksoftapi.enums.ImageType;
+import  net.explodingbush.ksoftapi.enums.Routes;
 
 public class KSoftAPI {
 
@@ -25,16 +26,16 @@ public class KSoftAPI {
     public RedditAction getRedditImage(ImageType type) {
         switch (type) {
             case RANDOM_MEME:
-                this.request = "https://api.ksoft.si/meme/random-meme";
+                this.request = REDDIT_URL + "random-meme";
                 break;
             case RANDOW_AWW:
-                this.request = "https://api.ksoft.si/meme/random-aww";
+                this.request = REDDIT_URL + "random-aww";
                 break;
             case RANDOM_NSFW:
-                this.request = "https://api.ksoft.si/meme/random-nsfw";
+                this.request = REDDIT_URL + "random-nsfw";
                 break;
             case RANDOM_REDDIT:
-                this.request = "https://api.ksoft.si/meme/rand-reddit/";
+                this.request = REDDIT_URL + "rand-reddit";
         }
         return new RedditAction(token, type, request);
     }

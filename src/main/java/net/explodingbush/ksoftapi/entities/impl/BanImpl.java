@@ -39,7 +39,7 @@ public class BanImpl implements Ban {
 
     @Override
     public String getEffectiveName() {
-        return getName() + "#" + String.valueOf(getDiscriminator());
+        return getName() + "#" + getDiscriminator();
     }
 
     @Override
@@ -80,20 +80,12 @@ public class BanImpl implements Ban {
 
     @Override
     public boolean isBanned() {
-        return json.getBoolean("exists");
+        return exists();
     }
 
     @Override
     public Stream<Ban> getBannedStream() {
-        if(json.isNull("data")) {
-            throw new MissingArgumentException("Ban list page number invalid.");
-        }
-        JSONArray array = json.getJSONArray("data");
-        List<Ban> banList = new ArrayList<>();
-        for(Object o : array) {
-            banList.add(new BanImpl(new JSONObject(o.toString())));
-        }
-        return Collections.unmodifiableList(banList).stream();
+        return getBannedList().stream();
     }
 
     @Override

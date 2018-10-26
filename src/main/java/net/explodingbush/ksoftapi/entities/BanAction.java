@@ -3,9 +3,11 @@ package net.explodingbush.ksoftapi.entities;
 import net.explodingbush.ksoftapi.KSoftAction;
 import net.explodingbush.ksoftapi.entities.impl.AddBanImpl;
 import net.explodingbush.ksoftapi.entities.impl.BanImpl;
+import net.explodingbush.ksoftapi.enums.Routes;
 import net.explodingbush.ksoftapi.exceptions.AddBanException;
 import net.explodingbush.ksoftapi.exceptions.LoginException;
 import net.explodingbush.ksoftapi.exceptions.MissingArgumentException;
+import net.explodingbush.ksoftapi.utils.Checks;
 import net.explodingbush.ksoftapi.utils.JSONBuilder;
 import org.json.JSONObject;
 
@@ -35,6 +37,7 @@ public class BanAction implements KSoftAction<Ban> {
         tokenValue = token;
     }
     public BanAction(boolean isAddingBan, JSONObject banJson) {
+    	Checks.notNull(banJson, "banJson");
         this.isAddingBan = isAddingBan;
         this.banJson = banJson;
     }
@@ -46,6 +49,7 @@ public class BanAction implements KSoftAction<Ban> {
      * @return BanAction instance. Useful for chaining.
      */
     public BanAction getBanList(int results) {
+    	Checks.positive(results, "results");
         this.results = results;
         return this;
     }
@@ -56,6 +60,7 @@ public class BanAction implements KSoftAction<Ban> {
      * @return BanAction instance. Useful for chaining.
      */
     public BanAction setUserId(String userId) {
+    	Checks.notNull(userId, "userId");
         this.banId = userId;
         return this;
     }
@@ -79,7 +84,7 @@ public class BanAction implements KSoftAction<Ban> {
         JSONObject json;
         if(isAddingBan) {
             json = banJson;
-            JSONObject newJson = new JSONBuilder().addBanKsoft(banJson, "https://api.ksoft.si/bans/add", tokenValue);
+            JSONObject newJson = new JSONBuilder().addBanKsoft(banJson, Routes.BAN_ADD, tokenValue);
             if(newJson.has("error")) {
                 throw new AddBanException(newJson.getString("message"));
             }
@@ -88,9 +93,9 @@ public class BanAction implements KSoftAction<Ban> {
                 throw new MissingArgumentException("Missing action value. Could not be parsed");
             }
             if (results == 0) {
-                json = new JSONBuilder().requestKsoft("https://api.ksoft.si/bans/info?user=" + String.valueOf(banId), tokenValue);
+                json = new JSONBuilder().requestKsoft(Routes.BAN_INFO + banId, tokenValue);
             } else {
-                json = new JSONBuilder().requestKsoft("https://api.ksoft.si/bans/list?per_page=" + String.valueOf(results), tokenValue);
+                json = new JSONBuilder().requestKsoft(Routes.BAN_LIST + "" + results, tokenValue);
             }
         }
         if (tokenValue.isEmpty() || !json.isNull("detail") && json.getString("detail").equalsIgnoreCase("Invalid token.")) {

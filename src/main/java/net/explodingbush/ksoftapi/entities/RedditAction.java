@@ -6,6 +6,7 @@ import net.explodingbush.ksoftapi.entities.impl.RedditImpl;
 import net.explodingbush.ksoftapi.exceptions.LoginException;
 import net.explodingbush.ksoftapi.exceptions.MissingArgumentException;
 import net.explodingbush.ksoftapi.exceptions.NotFoundException;
+import net.explodingbush.ksoftapi.utils.Checks;
 import net.explodingbush.ksoftapi.utils.JSONBuilder;
 import okhttp3.Response;
 import org.json.JSONObject;
@@ -21,6 +22,9 @@ public class RedditAction implements KSoftAction<Reddit> {
     private Logger logger = LoggerFactory.getLogger(RedditAction.class);
 
     public RedditAction(String token, ImageType type, String request) {
+    	Checks.notNull(token, "token");
+    	Checks.notNull(type, "type");
+    	Checks.notNull(request, "request");
         this.token = token;
         this.type = type;
         this.request = request;
@@ -33,6 +37,7 @@ public class RedditAction implements KSoftAction<Reddit> {
      * @return RedditAction instance. Useful for chaining.
      */
     public RedditAction setSubreddit(String subreddit) {
+    	Checks.notNull(subreddit, "subreddit");
         this.subreddit = subreddit;
         return this;
     }

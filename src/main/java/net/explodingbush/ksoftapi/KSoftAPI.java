@@ -6,7 +6,8 @@ import net.explodingbush.ksoftapi.entities.TaggedImageAction;
 import net.explodingbush.ksoftapi.entities.WikihowAction;
 import net.explodingbush.ksoftapi.enums.ImageTag;
 import net.explodingbush.ksoftapi.enums.ImageType;
-import  net.explodingbush.ksoftapi.enums.Routes;
+import net.explodingbush.ksoftapi.enums.Routes;
+import net.explodingbush.ksoftapi.utils.Checks;
 
 import static net.explodingbush.ksoftapi.enums.Routes.REDDIT_URL;
 
@@ -16,6 +17,7 @@ public class KSoftAPI {
     private String request;
 
     public KSoftAPI(String token) {
+    	Checks.notNull(token, "token");
         this.token = token;
     }
 
@@ -26,18 +28,19 @@ public class KSoftAPI {
      * @return {@link net.explodingbush.ksoftapi.entities.RedditAction RedditAction}s
      */
     public RedditAction getRedditImage(ImageType type) {
+    	Checks.notNull(type, "type");
         switch (type) {
             case RANDOM_MEME:
-                this.request = REDDIT_URL + "random-meme";
+                this.request = Routes.REDDIT + "random-meme";
                 break;
             case RANDOW_AWW:
-                this.request = REDDIT_URL + "random-aww";
+                this.request = Routes.REDDIT + "random-aww";
                 break;
             case RANDOM_NSFW:
-                this.request = REDDIT_URL + "random-nsfw";
+                this.request = Routes.REDDIT + "random-nsfw";
                 break;
             case RANDOM_REDDIT:
-                this.request = REDDIT_URL + "rand-reddit";
+                this.request = Routes.REDDIT + "rand-reddit";
         }
         return new RedditAction(token, type, request);
     }
@@ -49,6 +52,7 @@ public class KSoftAPI {
      * @return {@link net.explodingbush.ksoftapi.entities.TaggedImageAction TaggedImageAction}
      */
     public TaggedImageAction getTaggedImage(ImageTag tag) {
+    	Checks.notNull(tag, "tag");
         return new TaggedImageAction(token, tag);
     }
     /**

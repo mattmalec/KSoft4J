@@ -1,6 +1,8 @@
 package net.explodingbush.ksoftapi.entities.impl;
 
 import net.explodingbush.ksoftapi.entities.Reddit;
+import net.explodingbush.ksoftapi.utils.Checks;
+
 import org.json.JSONObject;
 
 import java.time.Instant;
@@ -11,6 +13,7 @@ public class RedditImpl implements Reddit {
 
     private final JSONObject json;
     public RedditImpl(JSONObject json) {
+    	Checks.notNull(json, "json");
         this.json = json;
     }
 

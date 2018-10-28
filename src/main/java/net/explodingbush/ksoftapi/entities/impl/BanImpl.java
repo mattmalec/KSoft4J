@@ -2,6 +2,8 @@ package net.explodingbush.ksoftapi.entities.impl;
 
 import net.explodingbush.ksoftapi.entities.Ban;
 import net.explodingbush.ksoftapi.exceptions.MissingArgumentException;
+import net.explodingbush.ksoftapi.exceptions.NotFoundException;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -44,6 +46,9 @@ public class BanImpl implements Ban {
 
     @Override
     public long getModId() {
+    	if(json.isNull("moderator_id")){
+    		throw new NotFoundException("Moderator ID not found!");
+    	}
         return json.getLong("moderator_id");
     }
 

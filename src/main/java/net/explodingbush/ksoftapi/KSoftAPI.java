@@ -9,8 +9,6 @@ import net.explodingbush.ksoftapi.enums.ImageType;
 import net.explodingbush.ksoftapi.enums.Routes;
 import net.explodingbush.ksoftapi.utils.Checks;
 
-import static net.explodingbush.ksoftapi.enums.Routes.REDDIT_URL;
-
 public class KSoftAPI {
 
     private final String token;

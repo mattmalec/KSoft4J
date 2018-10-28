@@ -53,14 +53,14 @@ public class RedditAction implements KSoftAction<Reddit> {
     public Reddit execute() throws LoginException, MissingArgumentException {
         Response response;
         JSONObject json;
-        if (request == null || type == ImageType.RANDOM_REDDIT && this.subreddit == null) {
+        if (request == null || type.equals(ImageType.RANDOM_REDDIT) && this.subreddit == null) {
             throw new MissingArgumentException("Subreddit not defined");
         }
-        if (subreddit != null && type != ImageType.RANDOM_REDDIT) {
+        if (subreddit != null && !type.equals(ImageType.RANDOM_REDDIT)) {
             logger.warn("You're setting a subreddit, but ImageType is not RANDOM_REDDIT");
         }
 
-        if (type == ImageType.RANDOM_REDDIT) {
+        if (type.equals(ImageType.RANDOM_REDDIT)) {
             request = request.concat(subreddit);
             response = new JSONBuilder().requestKsoftResponse(request, token);
             if (response.code() == 500 || response.code() == 404 || response.code() == 130) {

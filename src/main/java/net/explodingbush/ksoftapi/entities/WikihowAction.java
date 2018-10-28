@@ -2,7 +2,9 @@ package net.explodingbush.ksoftapi.entities;
 
 import net.explodingbush.ksoftapi.KSoftAction;
 import net.explodingbush.ksoftapi.entities.impl.WikihowImpl;
+import net.explodingbush.ksoftapi.enums.Routes;
 import net.explodingbush.ksoftapi.exceptions.LoginException;
+import net.explodingbush.ksoftapi.utils.Checks;
 import net.explodingbush.ksoftapi.utils.JSONBuilder;
 import org.json.JSONObject;
 
@@ -13,6 +15,7 @@ public class WikihowAction implements KSoftAction<Wikihow> {
     private boolean allowNsfw;
 
     public WikihowAction(String token) {
+    	Checks.notNull(token, "token");
         this.token = token;
     }
 
@@ -36,7 +39,7 @@ public class WikihowAction implements KSoftAction<Wikihow> {
      * If the token is not provided or incorrect.
      */
     public Wikihow execute() {
-        json = new JSONBuilder().requestKsoft("https://api.ksoft.si/images/random-wikihow?nsfw=" + String.valueOf(allowNsfw), token);
+        json = new JSONBuilder().requestKsoft(String.format(Routes.WIKIHOW.toString(), String.valueOf(allowNsfw)), token);
         if (token.isEmpty() || !json.isNull("detail") && json.getString("detail").equalsIgnoreCase("Invalid token.")) {
             throw new LoginException();
         }

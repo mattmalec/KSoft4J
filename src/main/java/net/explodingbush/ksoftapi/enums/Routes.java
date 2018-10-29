@@ -11,7 +11,7 @@ public enum Routes {
 	  
 	private final String route;
 	  
-	private Routes(String route){
+	Routes(String route){
 	  this.route = route;
 	}
 	public String toString(){

@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import net.explodingbush.ksoftapi.KSoftAction;
 import net.explodingbush.ksoftapi.entities.impl.LyricImpl;
@@ -15,7 +13,6 @@ import net.explodingbush.ksoftapi.exceptions.LoginException;
 import net.explodingbush.ksoftapi.exceptions.NotFoundException;
 import net.explodingbush.ksoftapi.utils.Checks;
 import net.explodingbush.ksoftapi.utils.JSONBuilder;
-import okhttp3.Response;
 
 public class LyricAction implements KSoftAction<List<Lyric>>{
 
@@ -23,7 +20,6 @@ public class LyricAction implements KSoftAction<List<Lyric>>{
 	private String query;
 	private String token;
 	private boolean textOnly;
-	private final Logger logger = LoggerFactory.getLogger(LyricAction.class);
 	
 	public LyricAction(String token){
 		Checks.notNull(token, "token");
@@ -47,16 +43,10 @@ public class LyricAction implements KSoftAction<List<Lyric>>{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Lyric> execute() {
-		Response response;
 		JSONObject json;
-		response = new JSONBuilder().requestKsoftResponse(String.format(Routes.LYRICS.toString(), query, Boolean.toString(textOnly), limit), token);
-		if (response.code() == 500 || response.code() == 404 || response.code() == 130) {
-            throw new NotFoundException("No lyrics were found that match the query.");
-        } else {
-            json = new JSONBuilder().getJSONResponse(response);
-            if (json.getInt("total") == 0) {
-            	throw new NotFoundException("No lyrics were found that match the query.");
-            }
+		json = new JSONBuilder().requestKsoft(String.format(Routes.LYRICS.toString(), query, Boolean.toString(textOnly), limit), token);
+        if (json.getInt("total") == 0) {
+        	throw new NotFoundException("No lyrics were found that match the query.");
         }
         if (token.isEmpty() || !json.isNull("detail") && json.getString("detail").equalsIgnoreCase("Invalid token.")) {
             throw new LoginException();

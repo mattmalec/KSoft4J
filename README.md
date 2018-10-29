@@ -119,7 +119,7 @@ Be sure to replace the **VERSION** key below with the one of the versions shown 
 **Gradle**
 ```gradle
 dependencies {
-    compile 'compile 'net.explodingbush.KSoft4J:KSoft4J:VERSION'
+    compile 'net.explodingbush.KSoft4J:KSoft4J:VERSION'
 }
 
 repositories {

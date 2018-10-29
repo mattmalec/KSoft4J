@@ -2,6 +2,8 @@ package net.explodingbush.ksoftapi.entities.impl;
 
 import net.explodingbush.ksoftapi.entities.Ban;
 import net.explodingbush.ksoftapi.exceptions.MissingArgumentException;
+import net.explodingbush.ksoftapi.exceptions.NotFoundException;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -39,11 +41,14 @@ public class BanImpl implements Ban {
 
     @Override
     public String getEffectiveName() {
-        return getName() + "#" + String.valueOf(getDiscriminator());
+        return getName() + "#" + getDiscriminator();
     }
 
     @Override
     public long getModId() {
+    	if(json.isNull("moderator_id")){
+    		throw new NotFoundException("Moderator ID not found!");
+    	}
         return json.getLong("moderator_id");
     }
 
@@ -80,20 +85,12 @@ public class BanImpl implements Ban {
 
     @Override
     public boolean isBanned() {
-        return json.getBoolean("exists");
+        return exists();
     }
 
     @Override
     public Stream<Ban> getBannedStream() {
-        if(json.isNull("data")) {
-            throw new MissingArgumentException("Ban list page number invalid.");
-        }
-        JSONArray array = json.getJSONArray("data");
-        List<Ban> banList = new ArrayList<>();
-        for(Object o : array) {
-            banList.add(new BanImpl(new JSONObject(o.toString())));
-        }
-        return Collections.unmodifiableList(banList).stream();
+        return getBannedList().stream();
     }
 
     @Override

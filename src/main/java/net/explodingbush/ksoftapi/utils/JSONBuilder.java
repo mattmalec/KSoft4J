@@ -6,6 +6,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 import org.json.JSONObject;
 
+import net.explodingbush.ksoftapi.enums.Routes;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -18,6 +20,7 @@ public class JSONBuilder {
 
 
     public JSONObject request(String url) {
+    	Checks.notNull(url, "url");
         try {
             String source = client.newCall(new Request.Builder().url(url).build()).execute().body().string();
             return new JSONObject(source);
@@ -27,6 +30,7 @@ public class JSONBuilder {
         return null;
     }
     public String requestRaw(String url) {
+    	Checks.notNull(url, "url");
         try {
             return client.newCall(new Request.Builder().url(url).build()).execute().body().string();
         } catch (IOException e) {
@@ -35,6 +39,7 @@ public class JSONBuilder {
         return null;
     }
     public JSONObject getJSONResponse(Response response) {
+    	Checks.notNull(response, "response");
         try {
             return new JSONObject(response.body().string());
         } catch (IOException e) {
@@ -43,6 +48,8 @@ public class JSONBuilder {
         return null;
     }
     public JSONObject requestKsoft(String url, String token) {
+    	Checks.notNull(url, "url");
+    	Checks.notNull(token, "token");
         try {
             String source = client.newCall(new Request.Builder().addHeader("Authorization", "Bearer " + token)
                     .url(url).build()).execute().body().string();
@@ -52,7 +59,16 @@ public class JSONBuilder {
         }
         return null;
     }
+    public JSONObject addBanKsoft(JSONObject json, Routes route, String token) {
+    	Checks.notNull(json, "json");
+    	Checks.notNull(route, "route");
+    	Checks.notNull(token, "token");
+    	return addBanKsoft(json, route.toString(), token);
+    }
     public JSONObject addBanKsoft(JSONObject json, String url, String token) {
+    	Checks.notNull(url, "url");
+    	Checks.notNull(json, "json");
+    	Checks.notNull(token, "token");
         FormBody.Builder body = new FormBody.Builder();
         if(json.has("user")) {
             body.add("user", json.getString("user"));
@@ -85,6 +101,8 @@ public class JSONBuilder {
         return null;
     }
     public Response requestKsoftResponse(String url, String token) {
+    	Checks.notNull(url, "url");
+    	Checks.notNull(token, "token");
         try {
             return client.newCall(new Request.Builder().addHeader("Authorization", "Bearer " + token)
                     .url(url).build()).execute();
@@ -94,6 +112,8 @@ public class JSONBuilder {
         return null;
     }
     public File getImage(String title, String url) {
+    	Checks.notNull(url, "url");
+    	Checks.notNull(title, "title");
         try {
             URL imageURL = new URL(url);
             BufferedImage img = ImageIO.read(imageURL.openStream());

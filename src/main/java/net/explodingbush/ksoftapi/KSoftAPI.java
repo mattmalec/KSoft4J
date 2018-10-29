@@ -1,6 +1,7 @@
 package net.explodingbush.ksoftapi;
 
 import net.explodingbush.ksoftapi.entities.BanAction;
+import net.explodingbush.ksoftapi.entities.LyricAction;
 import net.explodingbush.ksoftapi.entities.RedditAction;
 import net.explodingbush.ksoftapi.entities.TaggedImageAction;
 import net.explodingbush.ksoftapi.entities.WikihowAction;
@@ -69,5 +70,8 @@ public class KSoftAPI {
      */
     public BanAction getBan() {
         return new BanAction(token);
+    }
+    public LyricAction getLyrics(String query){
+    	return new LyricAction(token).search(query);
     }
 }

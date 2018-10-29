@@ -8,7 +8,7 @@ public enum Routes {
 	IMAGE("https://api.ksoft.si/images/random-image?tag=%s&nsfw=%s"),
 	WIKIHOW("https://api.ksoft.si/images/random-wikihow?nsfw=%s"),
 	REDDIT("https://api.ksoft.si/meme/"),
-	LYRICS("https://api.ksoft.si/lyrics/search?q=");
+	LYRICS("https://api.ksoft.si/lyrics/search?q=%s&text_only=%s&limit=%d");
 	  
 	private final String route;
 	  

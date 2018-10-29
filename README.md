@@ -43,7 +43,6 @@ public class Main {
 * Warnings
     You may encounter a `You're setting a subreddit, but ImageType is not RANDOM_REDDIT` warning when working with images.<br>
     You can fix this by removing `.setSubreddit()` when you aren't using an `ImageType.RANDOM_REDDIT`.
-<br>
 **Getting a ban**:
 
 ```java

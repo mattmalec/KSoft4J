@@ -5,8 +5,9 @@ public interface Lyric {
 	//TODO: javadocs
 	
 	String getArtistName();
-	String getFullTitle();
+	String getSearchString();
 	String getTitle();
+	String getFullTitle();
 	String getLyrics();
 	
 	

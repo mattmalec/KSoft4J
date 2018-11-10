@@ -19,13 +19,18 @@ public class LyricImpl implements Lyric {
 	}
 
 	@Override
-	public String getFullTitle() {
+	public String getSearchString() {
 		return json.getString("search_str");
 	}
 
 	@Override
 	public String getTitle() {
 		return json.getString("name");
+	}
+
+	@Override
+	public String getFullTitle() {
+		return String.format("%s - %s", getArtistName(), getTitle());
 	}
 
 	@Override

@@ -8,7 +8,8 @@ public enum Routes {
 	IMAGE("https://api.ksoft.si/images/random-image?tag=%s&nsfw=%s"),
 	WIKIHOW("https://api.ksoft.si/images/random-wikihow?nsfw=%s"),
 	REDDIT("https://api.ksoft.si/meme/"),
-	LYRICS("https://api.ksoft.si/lyrics/search?q=");
+	LYRICS("https://api.ksoft.si/lyrics/search?q=%s&text_only=%s&limit=%d"),
+	KUMO("https://api.ksoft.si/kumo/weather/%s?q=%s&units=%s&lang=%s");
 	  
 	private final String route;
 	  

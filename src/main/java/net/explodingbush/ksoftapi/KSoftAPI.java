@@ -1,10 +1,6 @@
 package net.explodingbush.ksoftapi;
 
-import net.explodingbush.ksoftapi.entities.BanAction;
-import net.explodingbush.ksoftapi.entities.LyricAction;
-import net.explodingbush.ksoftapi.entities.RedditAction;
-import net.explodingbush.ksoftapi.entities.TaggedImageAction;
-import net.explodingbush.ksoftapi.entities.WikihowAction;
+import net.explodingbush.ksoftapi.entities.*;
 import net.explodingbush.ksoftapi.enums.ImageTag;
 import net.explodingbush.ksoftapi.enums.ImageType;
 import net.explodingbush.ksoftapi.enums.Routes;
@@ -73,5 +69,8 @@ public class KSoftAPI {
     }
     public LyricAction getLyrics(String query){
     	return new LyricAction(token).search(query);
+    }
+    public KumoAction getKumo() {
+        return new KumoAction(token);
     }
 }

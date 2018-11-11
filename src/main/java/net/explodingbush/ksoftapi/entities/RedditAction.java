@@ -67,9 +67,6 @@ public class RedditAction implements KSoftAction<Reddit> {
                 throw new NotFoundException("The specified subreddit was not found.");
             } else {
                 json = new JSONBuilder().getJSONResponse(response);
-                if (json.has("error")) {
-                    throw new NotFoundException("The specified subreddit was not found.");
-                }
             }
             if (token.isEmpty() || !json.isNull("detail") && json.getString("detail").equalsIgnoreCase("Invalid token.")) {
                 throw new LoginException();

@@ -1,14 +1,12 @@
 package net.explodingbush.ksoftapi;
 
-import net.explodingbush.ksoftapi.entities.Lyric;
-
-import java.util.List;
+import net.explodingbush.ksoftapi.entities.Kumo;
+import net.explodingbush.ksoftapi.enums.ReportType;
 
 public class Main {
     public static void main(String[] args) {
         KSoftAPI api = new KSoftAPI("27ad9320ead0dba5c43bf00856256f88bbe30024");
-        List<Lyric> lyrics = api.getLyrics("dead dreams").execute();
-        Lyric logic = lyrics.get(0);
-        System.out.println(logic.getFullTitle());
+        Kumo kumo = api.getKumo().setLocationQuery("syracuse").setReportType(ReportType.CURRENTLY).execute();
+        kumo.getAlerts().forEach(alert -> System.out.printf("\n\nTitle: %s\nRegions: %s\nTime: %s\nExpires: %s\nDescription: %s", alert.getTitle(), alert.getRegions(), alert.getTime(), alert.getExpiryTime(), alert.getDescription()));
     }
 }

@@ -43,6 +43,7 @@ public class Main {
 * Warnings
     You may encounter a `You're setting a subreddit, but ImageType is not RANDOM_REDDIT` warning when working with images.<br>
     You can fix this by removing `.setSubreddit()` when you aren't using an `ImageType.RANDOM_REDDIT`.
+    
 **Getting a ban**:
 
 ```java
@@ -118,7 +119,7 @@ Be sure to replace the **VERSION** key below with the one of the versions shown 
 **Gradle**
 ```gradle
 dependencies {
-    compile 'compile 'net.explodingbush.KSoft4J:KSoft4J:VERSION'
+    compile 'net.explodingbush.KSoft4J:KSoft4J:VERSION'
 }
 
 repositories {

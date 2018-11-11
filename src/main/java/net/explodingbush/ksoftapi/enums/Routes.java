@@ -7,11 +7,12 @@ public enum Routes {
 	BAN_LIST("https://api.ksoft.si/bans/list?per_page="),
 	IMAGE("https://api.ksoft.si/images/random-image?tag=%s&nsfw=%s"),
 	WIKIHOW("https://api.ksoft.si/images/random-wikihow?nsfw=%s"),
-	REDDIT("https://api.ksoft.si/meme/");
+	REDDIT("https://api.ksoft.si/meme/"),
+	LYRICS("https://api.ksoft.si/lyrics/search?q=");
 	  
 	private final String route;
 	  
-	private Routes(String route){
+	Routes(String route){
 	  this.route = route;
 	}
 	public String toString(){

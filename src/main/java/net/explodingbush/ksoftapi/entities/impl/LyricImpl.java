@@ -8,7 +8,12 @@ import net.explodingbush.ksoftapi.utils.ArrayUtils;
 public class LyricImpl implements Lyric {
 
 	private JSONObject json;
-	
+
+	@Override
+	public String getAlbumArtUrl() {
+		return json.getString("album_art");
+	}
+
 	public LyricImpl(JSONObject json){
 		this.json = json;
 	}

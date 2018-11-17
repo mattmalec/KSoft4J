@@ -1,5 +1,4 @@
 package net.explodingbush.ksoftapi.entities;
 
-public interface Kumo {
-
+public class VoteManager {
 }

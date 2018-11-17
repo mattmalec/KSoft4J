@@ -3,8 +3,10 @@ package net.explodingbush.ksoftapi;
 import net.explodingbush.ksoftapi.entities.*;
 import net.explodingbush.ksoftapi.enums.ImageTag;
 import net.explodingbush.ksoftapi.enums.ImageType;
+import net.explodingbush.ksoftapi.enums.KumoType;
 import net.explodingbush.ksoftapi.enums.Routes;
 import net.explodingbush.ksoftapi.utils.Checks;
+import net.explodingbush.ksoftapi.webhooks.WebhookManager;
 
 public class KSoftAPI {
 
@@ -14,6 +16,10 @@ public class KSoftAPI {
     public KSoftAPI(String token) {
     	Checks.notNull(token, "token");
         this.token = token;
+    }
+
+    public WebhookManager getWebhookManager() {
+        return new WebhookManager(this);
     }
 
     /**
@@ -70,7 +76,7 @@ public class KSoftAPI {
     public LyricAction getLyrics(String query){
     	return new LyricAction(token).search(query);
     }
-    public KumoAction getKumo() {
-        return new KumoAction(token);
+    public KumoWeatherAction getKumo(KumoType kumoType) {
+        return new KumoWeatherAction(kumoType, token);
     }
 }

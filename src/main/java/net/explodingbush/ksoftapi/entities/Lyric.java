@@ -9,14 +9,10 @@ public interface Lyric {
 	String getTitle();
 	String getFullTitle();
 	String getLyrics();
-	
-	
+	String getAlbumArtUrl();
 	String[] getAlbums();
-	
-	
 	int getArtistId();
 	int getSongId();
-	
 	int[] getAlbumIds();
 	int[] getAlbumReleaseYears();
 	

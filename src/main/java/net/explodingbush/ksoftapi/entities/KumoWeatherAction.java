@@ -1,52 +1,54 @@
 package net.explodingbush.ksoftapi.entities;
 
 import net.explodingbush.ksoftapi.KSoftAction;
-import net.explodingbush.ksoftapi.entities.impl.KumoImpl;
-import net.explodingbush.ksoftapi.enums.Language;
-import net.explodingbush.ksoftapi.enums.ReportType;
-import net.explodingbush.ksoftapi.enums.Routes;
-import net.explodingbush.ksoftapi.enums.Units;
+import net.explodingbush.ksoftapi.entities.impl.KumoCurrentlyImpl;
+import net.explodingbush.ksoftapi.entities.impl.KumoHourlyImpl;
+import net.explodingbush.ksoftapi.entities.impl.KumoMinutelyImpl;
+import net.explodingbush.ksoftapi.enums.*;
 import net.explodingbush.ksoftapi.exceptions.LoginException;
 import net.explodingbush.ksoftapi.exceptions.NotFoundException;
 import net.explodingbush.ksoftapi.utils.JSONBuilder;
 import okhttp3.Response;
 import org.json.JSONObject;
 
-public class KumoAction implements KSoftAction<Kumo> {
+public class KumoWeatherAction implements KSoftAction<KumoWeather> {
 
     private String token;
     private String locationQuery;
     private String unit = "auto";
     private String language = "en";
-    private String reportType = "currently";
+    private ReportType reportType = ReportType.CURRENTLY;
+    private KumoType kumoType;
 
-    public KumoAction(String token) {
+    public KumoWeatherAction(KumoType kumoType, String token) {
         this.token = token;
+        this.kumoType = kumoType;
     }
 
-    public KumoAction setLocationQuery(String query) {
+    public KumoWeatherAction setLocationQuery(String query) {
         this.locationQuery = query;
         return this;
     }
 
-    public KumoAction setUnits(Units unit) {
+    public KumoWeatherAction setUnits(Units unit) {
         this.unit = unit.toString().toLowerCase();
         return this;
     }
 
-    public KumoAction setLanguage(Language language) {
+    public KumoWeatherAction setLanguage(Language language) {
         this.language = language.toString().toLowerCase();
         return this;
     }
 
-    public KumoAction setReportType(ReportType reportType) {
-        this.reportType = reportType.toString().toLowerCase();
+    public KumoWeatherAction setReportType(ReportType reportType) {
+        this.reportType = reportType;
         return this;
     }
 
+
     @Override
-    public Kumo execute() {
-        Response response = new JSONBuilder().requestKsoftResponse(String.format(Routes.KUMO.toString(), reportType, locationQuery, unit, language), token);
+    public KumoWeather execute() {
+        Response response = new JSONBuilder().requestKsoftResponse(String.format(Routes.KUMO.toString(), reportType.toString().toLowerCase(), locationQuery, unit, language), token);
         if(response.code() == 500) {
             throw new NotFoundException("NANI broke something. Everything is currently being exploded");
         }
@@ -57,7 +59,11 @@ public class KumoAction implements KSoftAction<Kumo> {
         if(json.has("code") && json.getInt("code") == 404) {
             throw new NotFoundException("The provided location was not found");
         }
-        System.out.println(json.toString());
-        return new KumoImpl(json);
+        switch(reportType) {
+            case CURRENTLY: return new KumoCurrentlyImpl(json);
+            case HOURLY: return new KumoHourlyImpl(json);
+            case MINUTELY: return new KumoMinutelyImpl(json);
+        }
+        return null;
     }
 }

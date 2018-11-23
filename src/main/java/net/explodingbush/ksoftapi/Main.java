@@ -1,19 +1,22 @@
 package net.explodingbush.ksoftapi;
 
-import net.explodingbush.ksoftapi.entities.BanEvent;
-import net.explodingbush.ksoftapi.entities.UnbanEvent;
-import net.explodingbush.ksoftapi.entities.VoteEvent;
+import net.explodingbush.ksoftapi.entities.*;
 import net.explodingbush.ksoftapi.hooks.KSoftListenerAdapter;
+
+import java.util.List;
 
 public class Main extends KSoftListenerAdapter {
     public static void main(String[] args) {
-        KSoftAPI api = new KSoftAPI("bc39f48ed2c43b33da1ec6c880340d9425b6a81a");
+        KSoftAPI api = new KSoftAPI("93bd74e8484d50ad87b404f0632a6ee905ccc65a");
         api.getWebhookManager()
                 .setPort(5000)
-                .setToken("j5MR43UNcxjw5Gs3PwPAyE9tyxPWvTy7")
-                .addEventListener(new Main())
-                .start();
-//        api.getBan().getBanList(10).execute().getBannedList().forEach(ban -> System.out.println(ban.getId()));
+                .setToken("eP2orU0noGdcV0CmVJ8w0WnL5S73EYAu")
+                .addEventListener(new Main());
+//                .start();
+        BulkBan bulkBan = api.getBan().checkBulkBan();
+        bulkBan.addId("510113958464716800").addId("503590053453365259").addId("428422645663662080");
+        List<Ban> list = bulkBan.set().execute().getBulkBanList();
+        System.out.println(list.toString());
     }
 
     @Override

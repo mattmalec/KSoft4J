@@ -23,7 +23,9 @@ public class WebhookService {
 
     Runnable runnable = () -> {
 
+
         port(new WebhookManager(null).getPort());
+
 
         get("/webhook", (req, res) ->
 
@@ -33,17 +35,23 @@ public class WebhookService {
             JSONObject data = (!req.body().isEmpty() ? new JSONObject(req.body()) : null);
             JSONObject json = new JSONObject();
             if (!token.equals(new WebhookManager(null).getToken())) {
-                json.put("error", true).put("message", "Authorization header does not match the specified token in KSoft4J.");
+                json.put("error", true).put("message", "Authorization header does not match the specified token in KSoft4J");
                 halt(401, json.toString());
             }
-            if(data.getString("event").equalsIgnoreCase("vote")) {
+            if (data.isNull("event")) {
+                json.put("error", true).put("message", "The event doesn't match an event in this wrapper");
+                halt(404, json.toString());
+            } else if(data.getString("event").equalsIgnoreCase("vote")) {
                 new VoteEventHandler(api).handleInternally(data);
             } else if (data.getString("event").equalsIgnoreCase("ban")) {
                 new BanEventHandler(api).handleInternally(data);
             } else if(data.getString("event").equalsIgnoreCase("unban")) {
                 new UnbanEventHandler(api).handleInternally(data);
+            } else {
+                json.put("error", true).put("message", "The event doesn't match an event in this wrapper");
+                halt(404, json.toString());
             }
-            json.put("error", false).put("message", "Successfully dispatched.");
+            json.put("error", false).put("message", "Successfully dispatched");
             return json.toString();
         });
         internalServerError((req, res) -> {
@@ -52,7 +60,8 @@ public class WebhookService {
             json.put("error", true).put("message", "Internal Server Error: 500");
             return json.toString();
         });
-
+        awaitInitialization();
+        logger.info("Webhook Server is now listening on " + port());
     };
     public Logger getLogger() {
         return logger;

@@ -1,12 +1,9 @@
 package net.explodingbush.ksoftapi.utils;
 
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import org.json.JSONObject;
-
 import net.explodingbush.ksoftapi.enums.Routes;
+import okhttp3.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -17,12 +14,13 @@ import java.net.URL;
 public class JSONBuilder {
 
     private OkHttpClient client = new OkHttpClient();
+    private final String userAgent = "KSoft4J/1.0";
 
 
     public JSONObject request(String url) {
     	Checks.notNull(url, "url");
         try {
-            String source = client.newCall(new Request.Builder().url(url).build()).execute().body().string();
+            String source = client.newCall(new Request.Builder().url(url).addHeader("User-Agent", userAgent).build()).execute().body().string();
             return new JSONObject(source);
         } catch (IOException e) {
             e.printStackTrace();
@@ -32,7 +30,7 @@ public class JSONBuilder {
     public String requestRaw(String url) {
     	Checks.notNull(url, "url");
         try {
-            return client.newCall(new Request.Builder().url(url).build()).execute().body().string();
+            return client.newCall(new Request.Builder().url(url).addHeader("User-Agent", userAgent).build()).execute().body().string();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -52,8 +50,21 @@ public class JSONBuilder {
     	Checks.notNull(token, "token");
         try {
             String source = client.newCall(new Request.Builder().addHeader("Authorization", "Bearer " + token)
-                    .url(url).build()).execute().body().string();
+                    .url(url).addHeader("User-Agent", userAgent).build()).execute().body().string();
             return new JSONObject(source);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public JSONArray bulkBanCheck(JSONObject json, String token, Routes route) {
+        Checks.notNull(json, "IDs");
+        System.out.println(json);
+        try {
+            Call response =  client.newCall(new Request.Builder().addHeader("Authorization", "Bearer " + token)
+                    .url(route.toString()).addHeader("User-Agent", userAgent).post(RequestBody.create(MediaType.parse("application/json"), json.toString())).addHeader("Content-Type", "application/json").build());
+            System.out.println(response.execute().body().string());
+            return new JSONArray(response.execute().body().string());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -93,7 +104,7 @@ public class JSONBuilder {
         }
         try {
             String source = client.newCall(new Request.Builder().addHeader("Authorization", "Bearer " + token)
-                    .url(url).post(body.build()).build()).execute().body().string();
+                    .url(url).addHeader("User-Agent", userAgent).post(body.build()).build()).execute().body().string();
             return new JSONObject(source);
         } catch (IOException e) {
             e.printStackTrace();
@@ -104,7 +115,7 @@ public class JSONBuilder {
     	Checks.notNull(url, "url");
     	Checks.notNull(token, "token");
         try {
-            return client.newCall(new Request.Builder().addHeader("Authorization", "Bearer " + token)
+            return client.newCall(new Request.Builder().addHeader("User-Agent", userAgent).addHeader("Authorization", "Bearer " + token)
                     .url(url).build()).execute();
         } catch (IOException e) {
             e.printStackTrace();

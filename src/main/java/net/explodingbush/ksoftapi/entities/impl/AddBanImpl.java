@@ -81,7 +81,7 @@ public class AddBanImpl implements AddBan {
         if(json.isNull("user_discriminator")) {
             throw new MissingArgumentException("setDiscriminator cannot be null");
         }
-        return new BanAction(true, json);
+        return new BanAction(true, false, json);
     }
 }
 

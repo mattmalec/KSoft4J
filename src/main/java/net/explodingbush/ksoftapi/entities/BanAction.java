@@ -3,12 +3,14 @@ package net.explodingbush.ksoftapi.entities;
 import net.explodingbush.ksoftapi.KSoftAction;
 import net.explodingbush.ksoftapi.entities.impl.AddBanImpl;
 import net.explodingbush.ksoftapi.entities.impl.BanImpl;
+import net.explodingbush.ksoftapi.entities.impl.BulkBanImpl;
 import net.explodingbush.ksoftapi.enums.Routes;
 import net.explodingbush.ksoftapi.exceptions.AddBanException;
 import net.explodingbush.ksoftapi.exceptions.LoginException;
 import net.explodingbush.ksoftapi.exceptions.MissingArgumentException;
 import net.explodingbush.ksoftapi.utils.Checks;
 import net.explodingbush.ksoftapi.utils.JSONBuilder;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -33,12 +35,14 @@ public class BanAction implements KSoftAction<Ban> {
     private int results;
     private boolean isAddingBan;
     private JSONObject banJson;
+    private boolean isBulkChecking;
     public BanAction(String token) {
         tokenValue = token;
     }
-    public BanAction(boolean isAddingBan, JSONObject banJson) {
+    public BanAction(boolean isAddingBan, boolean isBulkChecking, JSONObject banJson) {
     	Checks.notNull(banJson, "banJson");
         this.isAddingBan = isAddingBan;
+        this.isBulkChecking = isBulkChecking;
         this.banJson = banJson;
     }
 
@@ -72,6 +76,9 @@ public class BanAction implements KSoftAction<Ban> {
         return new AddBanImpl();
     }
 
+    public BulkBan checkBulkBan() {
+        return new BulkBanImpl();
+    }
     /**
      * Executes the request with the specified parameters
      *
@@ -88,6 +95,13 @@ public class BanAction implements KSoftAction<Ban> {
             if(newJson.has("error")) {
                 throw new AddBanException(newJson.getString("message"));
             }
+        } else if(isBulkChecking) {
+            json = banJson;
+            System.out.println(json + " h");
+            JSONObject data = new JSONObject();
+            JSONArray array = new JSONBuilder().bulkBanCheck(json, tokenValue, Routes.BAN_BULK);
+            data.put("data", array);
+            json = data;
         } else {
             if (results == 0 && banId == null) {
                 throw new MissingArgumentException("Missing action value. Could not be parsed");

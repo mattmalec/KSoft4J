@@ -108,4 +108,17 @@ public interface Ban {
      */
     Stream<Ban> getBannedStream();
 
+    /**
+     * Gets a list of banned users from a bulk ban check
+     *
+     * @return An immutable list of banned users from a bulk ban check specified by {@link BanAction#checkBulkBan()}  BanAction#checkBulkBan}
+     */
+    List<Ban> getBulkBanList();
+
+    /**
+     * Gets a stream of banned users from a bulk ban check
+     *
+     * @return An immutable stream of banned users from a bulk ban check specified by {@link BanAction#checkBulkBan()}  BanAction#checkBulkBan}
+     */
+    Stream<Ban> getBulkBanStream();
 }

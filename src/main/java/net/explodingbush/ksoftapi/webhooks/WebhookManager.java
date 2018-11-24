@@ -6,6 +6,7 @@ import net.explodingbush.ksoftapi.hooks.InterfacedKSoftEventManager;
 import net.explodingbush.ksoftapi.KSoftAPI;
 import net.explodingbush.ksoftapi.exceptions.InvalidPortException;
 import net.explodingbush.ksoftapi.utils.Checks;
+import org.json.JSONObject;
 
 public class WebhookManager {
 
@@ -63,6 +64,7 @@ public class WebhookManager {
     }
 
     public int getPort() {
+        JSONObject json = new JSONObject();
         return listenPort;
     }
 }

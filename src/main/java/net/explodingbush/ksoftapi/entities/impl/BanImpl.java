@@ -1,9 +1,7 @@
 package net.explodingbush.ksoftapi.entities.impl;
 
 import net.explodingbush.ksoftapi.entities.Ban;
-import net.explodingbush.ksoftapi.exceptions.MissingArgumentException;
 import net.explodingbush.ksoftapi.exceptions.NotFoundException;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -47,7 +45,7 @@ public class BanImpl implements Ban {
     @Override
     public long getModId() {
     	if(json.isNull("moderator_id")){
-    		throw new NotFoundException("Moderator ID not found!");
+    		throw new NotFoundException("Moderator ID not found");
     	}
         return json.getLong("moderator_id");
     }
@@ -89,20 +87,32 @@ public class BanImpl implements Ban {
     }
 
     @Override
-    public Stream<Ban> getBannedStream() {
-        return getBannedList().stream();
-    }
-
-    @Override
     public List<Ban> getBannedList() {
-        if(json.isNull("data")) {
-            throw new MissingArgumentException("Ban list page number invalid.");
-        }
         JSONArray array = json.getJSONArray("data");
         List<Ban> banList = new ArrayList<>();
         for(Object o : array) {
             banList.add(new BanImpl(new JSONObject(o.toString())));
         }
         return Collections.unmodifiableList(banList);
+    }
+
+    @Override
+    public Stream<Ban> getBannedStream() {
+        return getBannedList().stream();
+    }
+
+    @Override
+    public List<Ban> getBulkBanList() {
+        return getBannedList();
+    }
+
+    @Override
+    public Stream<Ban> getBulkBanStream() {
+        return getBannedStream();
+    }
+
+    @Override
+    public String toString() {
+        return json.toString();
     }
 }

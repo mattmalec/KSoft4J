@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Main extends KSoftListenerAdapter {
     public static void main(String[] args) {
-        KSoftAPI api = new KSoftAPI("93bd74e8484d50ad87b404f0632a6ee905ccc65ab ");
+        KSoftAPI api = new KSoftAPI("93bd74e8484d50ad87b404f0632a6ee905ccc65a");
         api.getWebhookManager()
                 .setPort(5000)
                 .setToken("eP2orU0noGdcV0CmVJ8w0WnL5S73EYAu")

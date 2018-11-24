@@ -95,9 +95,7 @@ public class BanAction implements KSoftAction<Ban> {
                 throw new AddBanException(newJson.getString("message"));
             }
         } else if(isBulkChecking) {
-            json = banJson;
-            JSONObject array = new JSONBuilder().bulkBanCheck(json, tokenValue, Routes.BAN_BULK);
-            json = array;
+            json = new JSONBuilder().bulkBanCheck(banJson, tokenValue, Routes.BAN_BULK);
         } else {
             if (results == 0 && banId == null) {
                 throw new MissingArgumentException("Missing action value. Could not be parsed");
@@ -108,7 +106,7 @@ public class BanAction implements KSoftAction<Ban> {
                 json = new JSONBuilder().requestKsoft(Routes.BAN_LIST + "" + results, tokenValue);
             }
         }
-        if (tokenValue.isEmpty() || !json.isNull("detail") && json.getString("detail").equalsIgnoreCase("Invalid token.") || !json.has("data")) {
+        if (tokenValue.isEmpty() || !json.isNull("detail") && json.getString("detail").equalsIgnoreCase("Invalid token.")) {
             throw new LoginException();
         }
         return new BanImpl(json);

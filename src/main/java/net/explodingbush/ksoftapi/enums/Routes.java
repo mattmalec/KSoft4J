@@ -8,6 +8,7 @@ public enum Routes {
 	BAN_BULK("https://api.ksoft.si/bans/bulkcheck?more_info=yes"),
 	IMAGE("https://api.ksoft.si/images/random-image?tag=%s&nsfw=%s"),
 	WIKIHOW("https://api.ksoft.si/images/random-wikihow?nsfw=%s"),
+	CURRENCY("https://api.ksoft.si/kumo/currency?from=%s&to=%s&value=%.2f"),
 	REDDIT("https://api.ksoft.si/meme/"),
 	LYRICS("https://api.ksoft.si/lyrics/search?q=%s&text_only=%s&limit=%d"),
 	KUMO("https://api.ksoft.si/kumo/weather/%s?q=%s&units=%s&lang=%s"),

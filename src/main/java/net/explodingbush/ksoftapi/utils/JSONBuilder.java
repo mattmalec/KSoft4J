@@ -2,7 +2,6 @@ package net.explodingbush.ksoftapi.utils;
 
 import net.explodingbush.ksoftapi.enums.Routes;
 import okhttp3.*;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.imageio.ImageIO;
@@ -57,12 +56,14 @@ public class JSONBuilder {
         }
         return null;
     }
-    public JSONArray bulkBanCheck(JSONObject json, String token, Routes route) {
+    public JSONObject bulkBanCheck(JSONObject json, String token, Routes route) {
         Checks.notNull(json, "IDs");
         try {
             Response response = client.newCall(new Request.Builder().addHeader("Authorization", "Bearer " + token)
                     .url(route.toString()).addHeader("User-Agent", userAgent).addHeader("Content-Type", "application/json").post(RequestBody.create(MediaType.parse("application/json"), json.toString().getBytes())).build()).execute();
-            return new JSONArray(response.body().string());
+            JSONObject bulk = new JSONObject();
+            bulk.put("data", response.body().string());
+            return new JSONObject(bulk);
         } catch (IOException e) {
             e.printStackTrace();
         }

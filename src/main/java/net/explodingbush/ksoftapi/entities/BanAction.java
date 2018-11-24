@@ -10,7 +10,6 @@ import net.explodingbush.ksoftapi.exceptions.LoginException;
 import net.explodingbush.ksoftapi.exceptions.MissingArgumentException;
 import net.explodingbush.ksoftapi.utils.Checks;
 import net.explodingbush.ksoftapi.utils.JSONBuilder;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -97,10 +96,8 @@ public class BanAction implements KSoftAction<Ban> {
             }
         } else if(isBulkChecking) {
             json = banJson;
-            JSONObject data = new JSONObject();
-            JSONArray array = new JSONBuilder().bulkBanCheck(json, tokenValue, Routes.BAN_BULK);
-            data.put("data", array);
-            json = data;
+            JSONObject array = new JSONBuilder().bulkBanCheck(json, tokenValue, Routes.BAN_BULK);
+            json = array;
         } else {
             if (results == 0 && banId == null) {
                 throw new MissingArgumentException("Missing action value. Could not be parsed");
@@ -111,7 +108,7 @@ public class BanAction implements KSoftAction<Ban> {
                 json = new JSONBuilder().requestKsoft(Routes.BAN_LIST + "" + results, tokenValue);
             }
         }
-        if (tokenValue.isEmpty() || !json.isNull("detail") && json.getString("detail").equalsIgnoreCase("Invalid token.")) {
+        if (tokenValue.isEmpty() || !json.isNull("detail") && json.getString("detail").equalsIgnoreCase("Invalid token.") || !json.has("data")) {
             throw new LoginException();
         }
         return new BanImpl(json);

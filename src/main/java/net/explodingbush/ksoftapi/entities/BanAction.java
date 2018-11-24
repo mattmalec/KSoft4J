@@ -97,7 +97,6 @@ public class BanAction implements KSoftAction<Ban> {
             }
         } else if(isBulkChecking) {
             json = banJson;
-            System.out.println(json + " h");
             JSONObject data = new JSONObject();
             JSONArray array = new JSONBuilder().bulkBanCheck(json, tokenValue, Routes.BAN_BULK);
             data.put("data", array);

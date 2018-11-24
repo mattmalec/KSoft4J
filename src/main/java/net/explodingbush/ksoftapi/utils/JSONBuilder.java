@@ -59,12 +59,10 @@ public class JSONBuilder {
     }
     public JSONArray bulkBanCheck(JSONObject json, String token, Routes route) {
         Checks.notNull(json, "IDs");
-        System.out.println(json);
         try {
-            Call response =  client.newCall(new Request.Builder().addHeader("Authorization", "Bearer " + token)
-                    .url(route.toString()).addHeader("User-Agent", userAgent).post(RequestBody.create(MediaType.parse("application/json"), json.toString())).addHeader("Content-Type", "application/json").build());
-            System.out.println(response.execute().body().string());
-            return new JSONArray(response.execute().body().string());
+            Response response = client.newCall(new Request.Builder().addHeader("Authorization", "Bearer " + token)
+                    .url(route.toString()).addHeader("User-Agent", userAgent).addHeader("Content-Type", "application/json").post(RequestBody.create(MediaType.parse("application/json"), json.toString().getBytes())).build()).execute();
+            return new JSONArray(response.body().string());
         } catch (IOException e) {
             e.printStackTrace();
         }

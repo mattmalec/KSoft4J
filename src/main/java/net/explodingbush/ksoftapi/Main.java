@@ -7,16 +7,16 @@ import java.util.List;
 
 public class Main extends KSoftListenerAdapter {
     public static void main(String[] args) {
-        KSoftAPI api = new KSoftAPI("93bd74e8484d50ad87b404f0632a6ee905ccc65a");
+        KSoftAPI api = new KSoftAPI("fuck you");
         api.getWebhookManager()
                 .setPort(5000)
-                .setToken("eP2orU0noGdcV0CmVJ8w0WnL5S73EYAu")
-                .addEventListener(new Main());
-//                .start();
+                .setToken("bitch")
+                .addEventListener(new Main())
+                .start();
         BulkBan bulkBan = api.getBan().checkBulkBan();
         bulkBan.addId("510113958464716800").addId("503590053453365259").addId("428422645663662080");
         List<Ban> list = bulkBan.set().execute().getBulkBanList();
-        System.out.println(list.toString());
+        list.forEach(ban -> System.out.println(ban.toString()));
     }
 
     @Override

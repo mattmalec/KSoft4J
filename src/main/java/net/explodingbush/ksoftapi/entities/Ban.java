@@ -121,4 +121,6 @@ public interface Ban {
      * @return An immutable stream of banned users from a bulk ban check specified by {@link BanAction#checkBulkBan()}  BanAction#checkBulkBan}
      */
     Stream<Ban> getBulkBanStream();
+
+    String toString();
 }

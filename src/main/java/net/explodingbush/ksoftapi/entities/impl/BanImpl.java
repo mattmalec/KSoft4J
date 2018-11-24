@@ -45,7 +45,7 @@ public class BanImpl implements Ban {
     @Override
     public long getModId() {
     	if(json.isNull("moderator_id")){
-    		throw new NotFoundException("Moderator ID not found!");
+    		throw new NotFoundException("Moderator ID not found");
     	}
         return json.getLong("moderator_id");
     }
@@ -109,5 +109,10 @@ public class BanImpl implements Ban {
     @Override
     public Stream<Ban> getBulkBanStream() {
         return getBannedStream();
+    }
+
+    @Override
+    public String toString() {
+        return json.toString();
     }
 }

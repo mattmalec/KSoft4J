@@ -3,6 +3,8 @@ package net.explodingbush.ksoftapi.entities;
 import java.time.OffsetDateTime;
 import java.util.List;
 
+import net.explodingbush.ksoftapi.enums.Units;
+
 public interface KumoWeather {
 
     List<KumoWeather> getAll();
@@ -54,5 +56,6 @@ public interface KumoWeather {
     String getMainIconUrl();
     List<Alert> getAlerts();
     Location getLocation();
+	Units getUnits();
 
 }

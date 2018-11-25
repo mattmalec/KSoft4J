@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import net.explodingbush.ksoftapi.entities.Lyric;
 import net.explodingbush.ksoftapi.utils.ArrayUtils;
 
+@Deprecated
 public class LyricImpl implements Lyric {
 
 	private JSONObject json;

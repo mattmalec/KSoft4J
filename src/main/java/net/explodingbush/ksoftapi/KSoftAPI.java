@@ -1,20 +1,22 @@
 package net.explodingbush.ksoftapi;
 
 import net.explodingbush.ksoftapi.entities.*;
+import net.explodingbush.ksoftapi.entities.lyrics.LyricCache;
 import net.explodingbush.ksoftapi.enums.ImageTag;
 import net.explodingbush.ksoftapi.enums.ImageType;
-import net.explodingbush.ksoftapi.enums.KumoType;
 import net.explodingbush.ksoftapi.enums.Routes;
 import net.explodingbush.ksoftapi.utils.Checks;
 import net.explodingbush.ksoftapi.webhooks.WebhookManager;
 
 public class KSoftAPI {
 
+	private LyricCache lyricCache;
     private final String token;
     private String request;
 
     public KSoftAPI(String token) {
     	Checks.notNull(token, "token");
+    	this.lyricCache = new LyricCache(token);
         this.token = token;
     }
 
@@ -73,10 +75,10 @@ public class KSoftAPI {
     public BanAction getBan() {
         return new BanAction(token);
     }
-    public LyricAction getLyrics(String query){
-    	return new LyricAction(token).search(query);
+    public LyricAction getLyrics(){
+    	return new LyricAction(token, lyricCache);
     }
-    public KumoWeatherAction getKumo(KumoType kumoType) {
-        return new KumoWeatherAction(kumoType, token);
+    public Kumo getKumo() {
+        return new Kumo(token);
     }
 }

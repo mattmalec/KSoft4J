@@ -18,11 +18,9 @@ public class KumoWeatherAction implements KSoftAction<KumoWeather> {
     private String unit = "auto";
     private String language = "en";
     private ReportType reportType = ReportType.CURRENTLY;
-    private KumoType kumoType;
 
-    public KumoWeatherAction(KumoType kumoType, String token) {
+    public KumoWeatherAction( String token) {
         this.token = token;
-        this.kumoType = kumoType;
     }
 
     public KumoWeatherAction setLocationQuery(String query) {
@@ -48,7 +46,7 @@ public class KumoWeatherAction implements KSoftAction<KumoWeather> {
 
     @Override
     public KumoWeather execute() {
-        Response response = new JSONBuilder().requestKsoftResponse(String.format(Routes.KUMO.toString(), reportType.toString().toLowerCase(), locationQuery, unit, language), token);
+        Response response = new JSONBuilder().requestKsoftResponse(String.format(Routes.KUMO_WEATHER.toString(), reportType.toString().toLowerCase(), locationQuery, unit, language), token);
         if(response.code() == 500) {
             throw new NotFoundException("NANI broke something. Everything is currently being exploded");
         }
@@ -63,7 +61,7 @@ public class KumoWeatherAction implements KSoftAction<KumoWeather> {
             case CURRENTLY: return new KumoCurrentlyImpl(json);
             case HOURLY: return new KumoHourlyImpl(json);
             case MINUTELY: return new KumoMinutelyImpl(json);
+            default: return null;
         }
-        return null;
     }
 }

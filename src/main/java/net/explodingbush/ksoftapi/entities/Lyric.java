@@ -1,5 +1,6 @@
 package net.explodingbush.ksoftapi.entities;
 
+@Deprecated
 public interface Lyric {
 
 	//TODO: javadocs

@@ -3,6 +3,8 @@ package net.explodingbush.ksoftapi.entities.impl;
 import net.explodingbush.ksoftapi.entities.Alert;
 import net.explodingbush.ksoftapi.entities.KumoWeather;
 import net.explodingbush.ksoftapi.entities.Location;
+import net.explodingbush.ksoftapi.enums.Units;
+
 import org.json.JSONObject;
 
 import java.time.Instant;
@@ -264,4 +266,12 @@ public class KumoCurrentlyImpl extends KumoImpl implements KumoWeather {
     public float getOzone() {
         return (float) json.getDouble("ozone");
     }
+
+	@Override
+	public Units getUnits() {
+		if(json.has("units")) {
+			return Units.valueOf(json.getString("units").toUpperCase());
+		}
+		return null;
+	}
 }

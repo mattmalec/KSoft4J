@@ -36,12 +36,21 @@ public class VoteImpl implements Vote {
     }
 
     @Override
-    public boolean getIsWeekend() {
+    public boolean isWeekend() {
         return json.getBoolean("isWeekend");
     }
 
     @Override
     public String getQuery() {
         return json.getString("query");
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Vote{\n");
+        json.toMap().forEach((s, o) -> builder.append(s + "=" + o + "\n"));
+        builder.append("}");
+        return builder.toString();
     }
 }

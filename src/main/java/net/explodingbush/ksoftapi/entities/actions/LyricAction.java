@@ -1,0 +1,101 @@
+package net.explodingbush.ksoftapi.entities.actions;
+
+import net.explodingbush.ksoftapi.KSoftActionAdapter;
+import net.explodingbush.ksoftapi.entities.Lyric;
+import net.explodingbush.ksoftapi.entities.impl.LyricImpl;
+import net.explodingbush.ksoftapi.enums.Routes;
+import net.explodingbush.ksoftapi.exceptions.LoginException;
+import net.explodingbush.ksoftapi.utils.Checks;
+import net.explodingbush.ksoftapi.utils.JSONBuilder;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+
+public class LyricAction extends KSoftActionAdapter<List<Lyric>> {
+
+	private int limit;
+	private String query;
+	private String token;
+	private boolean textOnly;
+	
+	public LyricAction(String token){
+		Checks.notNull(token, "token");
+		this.token = token;
+		this.limit = 10;
+	}
+
+	/**
+	 * Declare the search query to find lyrics with
+	 *
+	 * @param query
+	 * The query to find lyrics with
+	 *
+	 * @return The LyricAction instance. Useful for chaining.
+	 */
+	public LyricAction search(String query){
+		Checks.notBlank(query, "query");
+		this.query = query;
+		return this;
+	}
+	/**
+	 * Declare if KSoft4J should search inside the lyrics rather the song and artist information
+	 *
+	 * <p>Default: <b>false (no)</b></p>
+	 * @param textOnly
+	 * True - Search within the lyrics
+	 * @return The LyricAction instance. Useful for chaining.
+	 */
+	public LyricAction searchLyricTextOnly(boolean textOnly) {
+		this.textOnly = textOnly;
+		return this;
+	}
+
+	/**
+	 * Declare the amount of results KSoft4J should return
+	 *
+	 * <p>Default: <b>10</b></p>
+	 * @param limit
+	 * The amount of results to return
+	 *
+	 * @return The LyricAction instance. Useful for chaining.
+	 */
+	public LyricAction setLimit(int limit) {
+		Checks.positive(limit, "limit");
+		this.limit = limit;
+		return this;
+	}
+	/**
+	 * Executes the provided request synchronously.
+	 *
+	 * <p><b>This method is synchronous</b></p>
+	 *
+	 * If there are no lyrics found, this will return an empty array.
+	 *
+	 * @return A possibly-empty {@link List<Lyric> List<Lyric>} of lyrics.
+	 * @throws LoginException If the token is not provided or incorrect.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Lyric> execute() {
+		JSONObject json;
+		json = new JSONBuilder().requestKsoft(String.format(Routes.LYRICS.toString(), query, Boolean.toString(textOnly), limit), token);
+        if (json.getInt("total") == 0) {
+        	return Collections.unmodifiableList(new ArrayList<>());
+        }
+        if (token.isEmpty() || !json.isNull("detail") && json.getString("detail").equalsIgnoreCase("Invalid token.")) {
+            throw new LoginException();
+        }
+        List<Lyric> lyrics = new ArrayList<>();
+        List<Object> lyricObjs = json.getJSONArray("data").toList();
+        if(lyricObjs.isEmpty()){
+			return Collections.unmodifiableList(new ArrayList<>());
+        }
+        for(Object obj : lyricObjs){
+        	lyrics.add(new LyricImpl(new JSONObject((HashMap<String, Object>)obj)));
+        }
+		return Collections.unmodifiableList(lyrics);
+	}
+}

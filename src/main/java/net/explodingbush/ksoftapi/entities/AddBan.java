@@ -1,5 +1,7 @@
 package net.explodingbush.ksoftapi.entities;
 
+import net.explodingbush.ksoftapi.entities.actions.BanAction;
+
 public interface AddBan {
 
     /**
@@ -82,5 +84,8 @@ public interface AddBan {
      * <p>No need to set an values in {@link BanAction BanAction}, just use the {@link BanAction#execute() execute} function.</p>
      */
     BanAction set();
+
+    @Override
+    String toString();
 
 }

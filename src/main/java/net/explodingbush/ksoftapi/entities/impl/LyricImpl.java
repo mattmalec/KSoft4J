@@ -79,5 +79,12 @@ public class LyricImpl implements Lyric {
 		}
 		return ArrayUtils.toIntArray(ids.split(","));
 	}
-
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Lyric{\n");
+		json.toMap().forEach((s, o) -> builder.append(s + "=" + o + "\n"));
+		builder.append("}");
+		return builder.toString();
+	}
 }

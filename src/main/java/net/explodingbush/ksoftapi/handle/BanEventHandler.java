@@ -3,7 +3,7 @@ package net.explodingbush.ksoftapi.handle;
 import net.explodingbush.ksoftapi.entities.impl.BanImpl;
 import net.explodingbush.ksoftapi.hooks.IKSoftListenerManager;
 import net.explodingbush.ksoftapi.KSoftAPI;
-import net.explodingbush.ksoftapi.entities.BanEvent;
+import net.explodingbush.ksoftapi.entities.events.BanEvent;
 import org.json.JSONObject;
 
 public class BanEventHandler extends Handler {

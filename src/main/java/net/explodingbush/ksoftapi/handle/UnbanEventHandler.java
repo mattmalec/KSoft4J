@@ -1,7 +1,7 @@
 package net.explodingbush.ksoftapi.handle;
 
 import net.explodingbush.ksoftapi.KSoftAPI;
-import net.explodingbush.ksoftapi.entities.UnbanEvent;
+import net.explodingbush.ksoftapi.entities.events.UnbanEvent;
 import net.explodingbush.ksoftapi.entities.impl.BanImpl;
 import net.explodingbush.ksoftapi.hooks.IKSoftListenerManager;
 import org.json.JSONObject;

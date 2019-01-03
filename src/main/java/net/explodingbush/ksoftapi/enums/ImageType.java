@@ -1,5 +1,7 @@
 package net.explodingbush.ksoftapi.enums;
 
+import net.explodingbush.ksoftapi.entities.actions.RedditAction;
+
 public enum ImageType {
     /**
      * Random memes from <b>dankmemes</b> and <b>memes</b>
@@ -29,7 +31,7 @@ public enum ImageType {
      */
     RANDOW_AWW,
     /**
-     * Random images from the {@link net.explodingbush.ksoftapi.entities.RedditAction#setSubreddit(String) RedditAction#setSubreddit}
+     * Random images from the {@link RedditAction#setSubreddit(String) RedditAction#setSubreddit}
      *
      */
     RANDOM_REDDIT

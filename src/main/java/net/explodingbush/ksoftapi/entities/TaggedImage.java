@@ -17,9 +17,9 @@ public interface TaggedImage {
     String getSnowflake();
 
     /**
-     * If an image is NSFW
+     * The image NSFW boolean
      *
-     * @return If the image is an NSFW image
+     * @return The corresponding boolean if the image is NSFW
      */
     boolean isNsfw();
 
@@ -29,6 +29,9 @@ public interface TaggedImage {
      * @return The tag of the image
      */
     String getTag();
+
+    @Override
+    String toString();
 
 
 }

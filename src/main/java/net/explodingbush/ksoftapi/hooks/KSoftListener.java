@@ -1,6 +1,6 @@
 package net.explodingbush.ksoftapi.hooks;
 
-import net.explodingbush.ksoftapi.entities.Event;
+import net.explodingbush.ksoftapi.entities.events.Event;
 
 @FunctionalInterface
 public interface KSoftListener {

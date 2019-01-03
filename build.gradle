@@ -4,7 +4,7 @@ plugins {
 	id 'java'
 	id 'maven'
 }
-version '1.0'
+version '1.0.2'
 ext {
     bintrayRepo = 'KSoft4J'
     bintrayName = 'KSoft4J'
@@ -18,7 +18,7 @@ ext {
     siteUrl = 'https://github.com/mjmalec/KSoft4J'
     gitUrl = 'https://github.com/mjmalec/KSoft4J.git'
 
-    libraryVersion = '1.0'
+    libraryVersion = '1.0.2'
 
     developerId = 'mjmalec'
     developerName = 'Matt Malec'

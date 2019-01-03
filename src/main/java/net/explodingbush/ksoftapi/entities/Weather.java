@@ -1,11 +1,13 @@
 package net.explodingbush.ksoftapi.entities;
 
+import net.explodingbush.ksoftapi.enums.PrecipType;
+
 import java.time.OffsetDateTime;
 import java.util.List;
 
-public interface KumoWeather {
+public interface Weather {
 
-    List<KumoWeather> getAll();
+    List<Weather> getAll();
     OffsetDateTime getTime();
     String getSummary();
     float getTemperature();
@@ -20,7 +22,7 @@ public interface KumoWeather {
     OffsetDateTime getPrecipIntensityMaxTime();
     float getPrecipProbability();
     float getPrecipAccumulation();
-    String getPrecipType();
+    PrecipType getPrecipType();
     float getTemperatureHigh();
     OffsetDateTime getTemperatureHighTime();
     float getTemperatureLow();
@@ -49,10 +51,10 @@ public interface KumoWeather {
     int getUvIndex();
     float getVisibility();
     float getOzone();
-    String getMainSummary();
-    String getMainIcon();
-    String getMainIconUrl();
     List<Alert> getAlerts();
     Location getLocation();
+
+    @Override
+    String toString();
 
 }

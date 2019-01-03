@@ -1,5 +1,7 @@
 package net.explodingbush.ksoftapi.entities;
 
+import net.explodingbush.ksoftapi.entities.actions.BanAction;
+
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.stream.Stream;
@@ -62,14 +64,14 @@ public interface Ban {
     /**
      * A value of a user's ban status
      *
-     * @return The corresponding true/false if the user is banned
+     * @return The corresponding boolean if the user is banned
      */
     boolean isBanActive();
 
     /**
      * A value if a user's ban is appeable
      *
-     * @return The corresponding true/false if the user's ban is appealable
+     * @return The corresponding boolean if the user's ban is appealable
      */
     boolean isAppealable();
 
@@ -90,7 +92,7 @@ public interface Ban {
     /**
      * A ban's active value
      *
-     * @return The corresponding true/false if the ban is active
+     * @return The corresponding boolean if the ban is active
      */
     boolean isBanned();
 
@@ -122,5 +124,22 @@ public interface Ban {
      */
     Stream<Ban> getBulkBanStream();
 
+    /**
+     * The appeal reason for a user ban
+     * <br>If the user is still banned or does not have an appeal reason, this will return null.
+     *
+     * @return Possibly-null corresponding appeal reason for the user ban
+     */
+    String getAppealReason();
+
+    /**
+     * The appeal date for a user ban
+     * <br>If the user is still banned, this will return null.
+     *
+     * @return Possibly-null corresponding appeal date for the user ban
+     */
+    OffsetDateTime getAppealDate();
+
+    @Override
     String toString();
 }

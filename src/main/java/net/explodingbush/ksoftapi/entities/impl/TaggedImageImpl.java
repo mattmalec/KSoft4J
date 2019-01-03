@@ -29,4 +29,13 @@ public class TaggedImageImpl implements TaggedImage {
     public String getTag() {
         return json.getString("tag");
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("TaggedImage{\n");
+        json.toMap().forEach((s, o) -> builder.append(s + "=" + o + "\n"));
+        builder.append("}");
+        return builder.toString();
+    }
 }

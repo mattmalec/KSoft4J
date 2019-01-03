@@ -17,9 +17,9 @@ public interface Wikihow {
     String getTitle();
 
     /**
-     * If a post is NSFW
+     * The post NSFW boolean
      *
-     * @return If the post is an NSFW post
+     * @return The corrosponding boolean if the post is an NSFW post
      */
     boolean isNsfw();
 
@@ -29,5 +29,8 @@ public interface Wikihow {
      * @return The corresponding URL of the Wikihow post
      */
     String getArticleUrl();
+
+    @Override
+    String toString();
 
 }

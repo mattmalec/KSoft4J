@@ -74,7 +74,7 @@ public class LyricAction extends KSoftActionAdapter<List<Lyric>> {
 	 *
 	 * If there are no lyrics found, this will return an empty array.
 	 *
-	 * @return A possibly-empty {@link List<Lyric> List<Lyric>} of lyrics.
+	 * @return A possibly-empty list of {@link Lyric Lyrics}
 	 * @throws LoginException If the token is not provided or incorrect.
 	 */
 	@SuppressWarnings("unchecked")

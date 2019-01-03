@@ -18,6 +18,7 @@ public enum RecommendationProvider {
 
     /**
      * Converts the enum to the KSoft alternative. Mostly used for executing the request
+     * @return The KSoft alternative
      */
     public String getType() {
         String provider = toString();

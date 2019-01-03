@@ -74,7 +74,6 @@ public class WeatherAction extends KSoftActionAdapter<Weather> {
      * @param reportType
      * The type of weather report to return
      *
-     * <p>
      *     If the {@link ReportType ReportType} is one of the following, you will need to use {@link Weather#getAll() Weather#getAll()} The following {@link ReportType ReportTypes} return an array of weather objects.
      *     You need to use {@link Weather#getAll() Weather#getAll()} to retreive all of them.
      *     <ul>
@@ -82,8 +81,7 @@ public class WeatherAction extends KSoftActionAdapter<Weather> {
      *         <li>{@link ReportType#HOURLY ReportType#HOURLY}</li>
      *         <li>{@link ReportType#DAILY ReportType#DAILY}</li>
      *     </ul>
-     * </p>
-     * <br />
+     *
      * <p>If the {@link ReportType ReportType} is {@link ReportType#CURRENTLY ReportType#CURRENTLY}, then {@link Weather#getAll() Weather#getAll()} will return an empty arraylist.</p>
      *
      * <p>If any of the {@link Weather Weather} methods return {@code null}, then that method is not supported by the declared {@link ReportType ReportType}</p>

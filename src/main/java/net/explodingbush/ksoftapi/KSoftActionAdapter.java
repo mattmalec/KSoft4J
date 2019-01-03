@@ -15,11 +15,10 @@ public abstract class KSoftActionAdapter<T> implements KSoftAction<T> {
     }
 
     /**
-     * Executes the provided request asynchronously. <br />
+     * Executes the provided request asynchronously.
      * This will ignore all called exceptions.
-     * <br />
+     *
      * <p><b>This method is asynchronous</b>
-     * <br />
      *
      * @param success
      * The success callback that will be called at at a convenient time for the wrapper. (this can be null)
@@ -33,9 +32,7 @@ public abstract class KSoftActionAdapter<T> implements KSoftAction<T> {
     /**
      * Executes the provided request asynchronously.
      *
-     * <br />
      * <p><b>This method is asynchronous</b>
-     * <br />
      *
      * @param success
      * The success callback that will be called at at a convenient time for the wrapper. (this can be null)

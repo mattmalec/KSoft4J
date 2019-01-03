@@ -27,7 +27,9 @@ public abstract class KSoftActionAdapter<T> implements KSoftAction<T> {
     @Override
     public void executeAsync(Consumer<? super T> success) {
         CompletableFuture<T> apple = CompletableFuture.supplyAsync(this::execute);
-        success.accept(apple.join());
+        try {
+            success.accept(apple.get());
+        } catch (ExecutionException | InterruptedException ignored) {}
     }
     /**
      * Executes the provided request asynchronously.
@@ -44,7 +46,7 @@ public abstract class KSoftActionAdapter<T> implements KSoftAction<T> {
     public void executeAsync(Consumer<? super T> success, Consumer<? super Throwable> failure) {
         CompletableFuture<T> apple = CompletableFuture.supplyAsync(this::execute);
         try {
-            success.accept(apple.join());
+            success.accept(apple.get());
         } catch (Exception e) {
             failure.accept(e);
         }

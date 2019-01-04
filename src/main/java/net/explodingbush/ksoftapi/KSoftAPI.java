@@ -96,5 +96,7 @@ public class KSoftAPI {
      *
      * @return {@link MusicAction KumoAction}
      */
-    public MusicAction getMusic() { return new MusicAction(token); }
+    public MusicAction getMusic() { 
+    	return new MusicAction(token); 
+    }
 }

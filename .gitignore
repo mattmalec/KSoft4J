@@ -24,7 +24,9 @@ hs_err_pid*
 
 local.properties
 
+.idea
+
 .gradle
 /build/
 !gradle-wrapper.jar
-Main.java
+src/test

@@ -1,7 +1,7 @@
 package net.explodingbush.ksoftapi.handle;
 
 import net.explodingbush.ksoftapi.KSoftAPI;
-import net.explodingbush.ksoftapi.entities.VoteEvent;
+import net.explodingbush.ksoftapi.entities.events.VoteEvent;
 import net.explodingbush.ksoftapi.entities.impl.VoteImpl;
 import net.explodingbush.ksoftapi.hooks.IKSoftListenerManager;
 import org.json.JSONObject;

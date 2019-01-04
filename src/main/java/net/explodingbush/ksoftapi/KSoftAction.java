@@ -1,11 +1,13 @@
 package net.explodingbush.ksoftapi;
 
+import java.util.function.Consumer;
+
 public interface KSoftAction<T> {
 
-/**
- * The thing that executes the requests
- * @return A method corresponding to the request
- */
     T execute();
+
+    void executeAsync();
+    void executeAsync(Consumer<? super T> success);
+    void executeAsync(Consumer<? super T> success, Consumer<? super Throwable> failure);
 
 }

@@ -1,9 +1,9 @@
 package net.explodingbush.ksoftapi.hooks;
 
-import net.explodingbush.ksoftapi.entities.BanEvent;
-import net.explodingbush.ksoftapi.entities.Event;
-import net.explodingbush.ksoftapi.entities.UnbanEvent;
-import net.explodingbush.ksoftapi.entities.VoteEvent;
+import net.explodingbush.ksoftapi.entities.events.BanEvent;
+import net.explodingbush.ksoftapi.entities.events.Event;
+import net.explodingbush.ksoftapi.entities.events.UnbanEvent;
+import net.explodingbush.ksoftapi.entities.events.VoteEvent;
 
 public abstract class KSoftListenerAdapter implements KSoftListener {
 

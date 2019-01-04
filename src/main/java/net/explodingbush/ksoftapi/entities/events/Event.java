@@ -1,4 +1,4 @@
-package net.explodingbush.ksoftapi.entities;
+package net.explodingbush.ksoftapi.entities.events;
 
 import net.explodingbush.ksoftapi.KSoftAPI;
 

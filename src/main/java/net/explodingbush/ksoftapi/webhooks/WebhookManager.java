@@ -1,10 +1,9 @@
 package net.explodingbush.ksoftapi.webhooks;
 
-import com.sun.istack.internal.Nullable;
-import net.explodingbush.ksoftapi.hooks.IKSoftListenerManager;
-import net.explodingbush.ksoftapi.hooks.InterfacedKSoftEventManager;
 import net.explodingbush.ksoftapi.KSoftAPI;
 import net.explodingbush.ksoftapi.exceptions.InvalidPortException;
+import net.explodingbush.ksoftapi.hooks.IKSoftListenerManager;
+import net.explodingbush.ksoftapi.hooks.InterfacedKSoftEventManager;
 import net.explodingbush.ksoftapi.utils.Checks;
 import org.json.JSONObject;
 
@@ -15,7 +14,7 @@ public class WebhookManager {
     private final KSoftAPI api;
     private IKSoftListenerManager eventManager = new InterfacedKSoftEventManager();
 
-    public WebhookManager(@Nullable KSoftAPI api) {
+    public WebhookManager(KSoftAPI api) {
         this.api = api;
     }
     public KSoftAPI getKSoftAPI() {

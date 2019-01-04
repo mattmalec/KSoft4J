@@ -1,7 +1,7 @@
 package net.explodingbush.ksoftapi.entities.impl;
 
 import net.explodingbush.ksoftapi.entities.AddBan;
-import net.explodingbush.ksoftapi.entities.BanAction;
+import net.explodingbush.ksoftapi.entities.actions.BanAction;
 import net.explodingbush.ksoftapi.exceptions.MissingArgumentException;
 import net.explodingbush.ksoftapi.utils.Checks;
 
@@ -55,7 +55,11 @@ public class AddBanImpl implements AddBan {
 
     @Override
     public String toString() {
-        return json.toString();
+        StringBuilder builder = new StringBuilder();
+        builder.append("AddBan{\n");
+        json.toMap().forEach((s, o) -> builder.append(s + "=" + o + "\n"));
+        builder.append("}");
+        return builder.toString();
     }
 
     @Override

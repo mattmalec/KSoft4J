@@ -59,10 +59,10 @@ public class RedditAction extends KSoftActionAdapter<Reddit> {
         if (subreddit != null && !type.equals(ImageType.RANDOM_REDDIT)) {
             logger.warn("You're setting a subreddit, but ImageType is not RANDOM_REDDIT");
         }
-        response = new JSONBuilder().requestKsoftResponse(request, token);
         if (type.equals(ImageType.RANDOM_REDDIT)) {
-            request = request.concat(subreddit);
+            request = request.concat("/" + subreddit);
         }
+        response = new JSONBuilder().requestKsoftResponse(request, token);
         json = new JSONBuilder().getJSONResponse(response);
         if (token.isEmpty() || !json.isNull("detail") && json.getString("detail").equalsIgnoreCase("Invalid token.")) {
             throw new LoginException();

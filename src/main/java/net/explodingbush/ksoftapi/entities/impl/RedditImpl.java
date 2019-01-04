@@ -48,7 +48,7 @@ public class RedditImpl implements Reddit {
 
     @Override
     public boolean subredditExists() {
-        return json.optBoolean("error");
+        return !json.has("error");
     }
 
     @Override

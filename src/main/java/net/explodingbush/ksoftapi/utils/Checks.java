@@ -18,9 +18,4 @@ public class Checks {
 			throw new IllegalArgumentException(name + " cannot be empty!");
 		}
 	}
-	public static void positive(double num, String name) {
-		if(num <= 0) {
-			throw new IllegalArgumentException(name + " must be larger that 0");
-		}
-	}
 }

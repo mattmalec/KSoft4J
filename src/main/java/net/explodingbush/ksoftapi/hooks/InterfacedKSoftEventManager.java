@@ -1,10 +1,6 @@
 package net.explodingbush.ksoftapi.hooks;
 
-<<<<<<< HEAD
-import net.explodingbush.ksoftapi.entities.Event;
-=======
 import net.explodingbush.ksoftapi.entities.events.Event;
->>>>>>> development
 import net.explodingbush.ksoftapi.webhooks.WebhookService;
 
 import java.util.ArrayList;
@@ -26,12 +22,7 @@ public class InterfacedKSoftEventManager implements IKSoftListenerManager {
     @Override
     public void register(Object listener)
     {
-<<<<<<< HEAD
-        if (!(listener instanceof KSoftListener))
-        {
-=======
         if (!(listener instanceof KSoftListener)) {
->>>>>>> development
             throw new IllegalArgumentException("Listener must implement KSoftListener");
         }
         listeners.add((KSoftListener) listener);

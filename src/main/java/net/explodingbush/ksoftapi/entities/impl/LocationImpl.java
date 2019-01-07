@@ -25,8 +25,6 @@ public class LocationImpl implements Location {
     public String getAddress() {
         return json.getString("address");
     }
-<<<<<<< HEAD
-=======
 
     @Override
     public String toString() {
@@ -36,5 +34,4 @@ public class LocationImpl implements Location {
         builder.append("}");
         return builder.toString();
     }
->>>>>>> development
 }

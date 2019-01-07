@@ -1,11 +1,6 @@
 package net.explodingbush.ksoftapi;
 
-<<<<<<< HEAD
-import net.explodingbush.ksoftapi.entities.*;
-import net.explodingbush.ksoftapi.entities.lyrics.LyricCache;
-=======
 import net.explodingbush.ksoftapi.entities.actions.*;
->>>>>>> development
 import net.explodingbush.ksoftapi.enums.ImageTag;
 import net.explodingbush.ksoftapi.enums.ImageType;
 import net.explodingbush.ksoftapi.enums.Routes;
@@ -14,13 +9,11 @@ import net.explodingbush.ksoftapi.webhooks.WebhookManager;
 
 public class KSoftAPI {
 
-	private LyricCache lyricCache;
     private final String token;
     private String request;
 
     public KSoftAPI(String token) {
     	Checks.notNull(token, "token");
-    	this.lyricCache = new LyricCache(token);
         this.token = token;
     }
 
@@ -79,13 +72,6 @@ public class KSoftAPI {
     public BanAction getBan() {
         return new BanAction(token);
     }
-<<<<<<< HEAD
-    public LyricAction getLyrics(){
-    	return new LyricAction(token, lyricCache);
-    }
-    public Kumo getKumo() {
-        return new Kumo(token);
-=======
 
     /**
      * This returns a {@link LyricAction LyricAction}
@@ -112,6 +98,5 @@ public class KSoftAPI {
      */
     public MusicAction getMusic() { 
     	return new MusicAction(token); 
->>>>>>> development
     }
 }

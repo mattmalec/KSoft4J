@@ -5,10 +5,6 @@ import org.json.JSONObject;
 import net.explodingbush.ksoftapi.entities.Lyric;
 import net.explodingbush.ksoftapi.utils.ArrayUtils;
 
-<<<<<<< HEAD
-@Deprecated
-=======
->>>>>>> development
 public class LyricImpl implements Lyric {
 
 	private JSONObject json;
@@ -83,9 +79,6 @@ public class LyricImpl implements Lyric {
 		}
 		return ArrayUtils.toIntArray(ids.split(","));
 	}
-<<<<<<< HEAD
-
-=======
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -94,5 +87,4 @@ public class LyricImpl implements Lyric {
 		builder.append("}");
 		return builder.toString();
 	}
->>>>>>> development
 }

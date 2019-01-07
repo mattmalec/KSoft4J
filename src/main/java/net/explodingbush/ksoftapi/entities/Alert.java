@@ -5,16 +5,6 @@ import java.util.List;
 
 public interface Alert {
 
-<<<<<<< HEAD
-    String getTitle();
-    List<String> getRegions();
-    String getSeverity();
-    OffsetDateTime getTime();
-    OffsetDateTime getExpiryTime();
-    String getDescription();
-    String getURL();
-
-=======
     /**
      * The title of a weather alert
      *
@@ -67,5 +57,4 @@ public interface Alert {
     @Override
     String toString();
 
->>>>>>> development
 }

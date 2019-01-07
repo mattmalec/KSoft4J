@@ -2,12 +2,6 @@ package net.explodingbush.ksoftapi.entities;
 
 public interface Location {
 
-<<<<<<< HEAD
-    double getLatitude();
-    double getLongitude();
-    String getAddress();
-
-=======
     /**
      * The latitude coordinates of a weather location
      *
@@ -31,5 +25,4 @@ public interface Location {
     @Override
     String toString();
 
->>>>>>> development
 }

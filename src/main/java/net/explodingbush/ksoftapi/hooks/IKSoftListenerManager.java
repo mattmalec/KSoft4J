@@ -1,6 +1,10 @@
 package net.explodingbush.ksoftapi.hooks;
 
+<<<<<<< HEAD
 import net.explodingbush.ksoftapi.entities.Event;
+=======
+import net.explodingbush.ksoftapi.entities.events.Event;
+>>>>>>> development
 
 import java.util.List;
 
@@ -24,7 +28,11 @@ public interface IKSoftListenerManager {
     void unregister(Object listener);
 
     /**
+<<<<<<< HEAD
      * Handles the provided {@link net.explodingbush.ksoftapi.entities.Event Event}.
+=======
+     * Handles the provided {@link Event Event}.
+>>>>>>> development
      * How this is handled is specified by the implementation.
      *
      * @param event

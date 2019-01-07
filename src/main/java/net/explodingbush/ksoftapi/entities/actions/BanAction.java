@@ -1,6 +1,9 @@
-package net.explodingbush.ksoftapi.entities;
+package net.explodingbush.ksoftapi.entities.actions;
 
-import net.explodingbush.ksoftapi.KSoftAction;
+import net.explodingbush.ksoftapi.KSoftActionAdapter;
+import net.explodingbush.ksoftapi.entities.AddBan;
+import net.explodingbush.ksoftapi.entities.Ban;
+import net.explodingbush.ksoftapi.entities.BulkBan;
 import net.explodingbush.ksoftapi.entities.impl.AddBanImpl;
 import net.explodingbush.ksoftapi.entities.impl.BanImpl;
 import net.explodingbush.ksoftapi.entities.impl.BulkBanImpl;
@@ -26,7 +29,7 @@ import org.json.JSONObject;
  * <code>ban.setUserId("123").setReason("Bad boy").setProof("nani is bad proof").set().execute();</code>
  */
 
-public class BanAction implements KSoftAction<Ban> {
+public class BanAction extends KSoftActionAdapter<Ban> {
 
 
     private String banId;
@@ -75,15 +78,22 @@ public class BanAction implements KSoftAction<Ban> {
         return new AddBanImpl();
     }
 
+    /**
+     * Returns a new {@link BulkBan} instance to check bans in bulk
+     * @return A new chainable {@link BulkBan} instance
+     */
     public BulkBan checkBulkBan() {
         return new BulkBanImpl();
     }
+
     /**
-     * Executes the request with the specified parameters
+     * Executes the provided request synchronously.
      *
-     * @return A new {@link Ban Ban} instance.
-     * @throws net.explodingbush.ksoftapi.exceptions.LoginException           If the token is not provided or incorrect.
-     * @throws net.explodingbush.ksoftapi.exceptions.MissingArgumentException If using {@link net.explodingbush.ksoftapi.entities.BanAction#getBanList(int) BanAction#getBanList} and the value is invalid
+     * <p><b>This method is synchronous</b></p>
+     *
+     * @return A not-null {@link Ban Ban} instance.
+     * @throws LoginException           If the token is not provided or incorrect.
+     * @throws MissingArgumentException If using {@link BanAction#getBanList(int) BanAction#getBanList} and the value is invalid
      */
     @Override
     public Ban execute() throws LoginException {

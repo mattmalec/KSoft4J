@@ -4,7 +4,11 @@ plugins {
 	id 'java'
 	id 'maven'
 }
-version '1.0'
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+version properties.getProperty("version")
 ext {
     bintrayRepo = 'KSoft4J'
     bintrayName = 'KSoft4J'
@@ -13,12 +17,12 @@ ext {
     libraryName = 'KSoft4J'
     artifact = 'KSoft4J'
 
-    libraryDescription = 'Java wrapper for the KSoftAPI'
+    libraryDescription = 'Official Java wrapper for the KSoftAPI'
 
     siteUrl = 'https://github.com/mjmalec/KSoft4J'
     gitUrl = 'https://github.com/mjmalec/KSoft4J.git'
 
-    libraryVersion = '1.0'
+    libraryVersion = properties.getProperty("version")
 
     developerId = 'mjmalec'
     developerName = 'Matt Malec'
@@ -69,16 +73,19 @@ task sourcesJar(type: Jar) {
     from System.getProperty("java.class.path")
 }
 
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
 artifacts {
+    archives javadocJar
     archives sourcesJar
 }
 
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-
 bintray {
-    user = properties.getProperty("bintray.user")
-    key = properties.getProperty("bintray.apikey")
+    user = properties.getProperty("user")
+    key = properties.getProperty("apikey")
 
     configurations = ['archives']
     pkg {

@@ -1,11 +1,11 @@
-package net.explodingbush.ksoftapi.entities;
+package net.explodingbush.ksoftapi.entities.actions;
 
-import net.explodingbush.ksoftapi.KSoftAction;
+import net.explodingbush.ksoftapi.KSoftActionAdapter;
+import net.explodingbush.ksoftapi.entities.Reddit;
 import net.explodingbush.ksoftapi.entities.impl.RedditImpl;
 import net.explodingbush.ksoftapi.enums.ImageType;
 import net.explodingbush.ksoftapi.exceptions.LoginException;
 import net.explodingbush.ksoftapi.exceptions.MissingArgumentException;
-import net.explodingbush.ksoftapi.exceptions.NotFoundException;
 import net.explodingbush.ksoftapi.utils.Checks;
 import net.explodingbush.ksoftapi.utils.JSONBuilder;
 import net.explodingbush.ksoftapi.webhooks.WebhookService;
@@ -13,7 +13,7 @@ import okhttp3.Response;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 
-public class RedditAction implements KSoftAction<Reddit> {
+public class RedditAction extends KSoftActionAdapter<Reddit> {
 
     private String token;
     private ImageType type;
@@ -59,13 +59,10 @@ public class RedditAction implements KSoftAction<Reddit> {
         if (subreddit != null && !type.equals(ImageType.RANDOM_REDDIT)) {
             logger.warn("You're setting a subreddit, but ImageType is not RANDOM_REDDIT");
         }
-        response = new JSONBuilder().requestKsoftResponse(request, token);
         if (type.equals(ImageType.RANDOM_REDDIT)) {
-            request = request.concat(subreddit);
-            if (response.code() == 500 || response.code() == 404 || response.code() == 130) {
-                throw new NotFoundException("The specified subreddit was not found.");
-            }
+            request = request.concat("/" + subreddit);
         }
+        response = new JSONBuilder().requestKsoftResponse(request, token);
         json = new JSONBuilder().getJSONResponse(response);
         if (token.isEmpty() || !json.isNull("detail") && json.getString("detail").equalsIgnoreCase("Invalid token.")) {
             throw new LoginException();

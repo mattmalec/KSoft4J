@@ -86,5 +86,8 @@ public interface Reddit {
      */
     boolean subredditExists();
 
+    @Override
+    String toString();
+
 
 }

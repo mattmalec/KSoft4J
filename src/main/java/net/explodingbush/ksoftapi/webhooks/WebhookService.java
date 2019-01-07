@@ -27,7 +27,11 @@ public class WebhookService {
         port(new WebhookManager(null).getPort());
 
 
+<<<<<<< HEAD
         get("/webhook", (req, res) ->
+=======
+        post("/webhook", (req, res) ->
+>>>>>>> development
 
         {
             res.type("application/json");

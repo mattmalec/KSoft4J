@@ -25,4 +25,16 @@ public class LocationImpl implements Location {
     public String getAddress() {
         return json.getString("address");
     }
+<<<<<<< HEAD
+=======
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Location{\n");
+        json.toMap().forEach((s, o) -> builder.append(s + "=" + o + "\n"));
+        builder.append("}");
+        return builder.toString();
+    }
+>>>>>>> development
 }

@@ -118,6 +118,18 @@ public class JSONBuilder {
         }
         return null;
     }
+    public Response recommendSongRequest(Routes route, JSONObject json, String token) {
+        Checks.notNull(route, "route");
+        Checks.notNull(token, "token");
+        Checks.notNull(json, "json");
+        try {
+           return client.newCall(new Request.Builder().addHeader("Content-Type", "application/json").post(RequestBody.create(MediaType.parse("application/json"), json.toString().getBytes())).addHeader("User-Agent", userAgent).addHeader("Authorization", "Bearer " + token)
+                    .url(route.toString()).build()).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     public Response requestKsoftResponse(String url, String token) {
     	Checks.notNull(url, "url");
     	Checks.notNull(token, "token");

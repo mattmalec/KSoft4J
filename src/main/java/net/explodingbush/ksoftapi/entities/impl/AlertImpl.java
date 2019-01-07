@@ -58,4 +58,16 @@ public class AlertImpl implements Alert {
     public String getURL() {
         return json.getString("uri");
     }
+<<<<<<< HEAD
+=======
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Alert{\n");
+        json.toMap().forEach((s, o) -> builder.append(s + "=" + o + "\n"));
+        builder.append("}");
+        return builder.toString();
+    }
+>>>>>>> development
 }

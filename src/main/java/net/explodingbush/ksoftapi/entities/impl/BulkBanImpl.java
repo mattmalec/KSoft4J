@@ -1,6 +1,10 @@
 package net.explodingbush.ksoftapi.entities.impl;
 
+<<<<<<< HEAD
 import net.explodingbush.ksoftapi.entities.BanAction;
+=======
+import net.explodingbush.ksoftapi.entities.actions.BanAction;
+>>>>>>> development
 import net.explodingbush.ksoftapi.entities.BulkBan;
 import org.json.JSONObject;
 
@@ -16,6 +20,16 @@ public class BulkBanImpl implements BulkBan {
         ids.add(id);
         return this;
     }
+<<<<<<< HEAD
+=======
+    @Override
+    public BulkBan addIds(String... ids) {
+        for(String s : ids) {
+            this.ids.add(s);
+        }
+        return this;
+    }
+>>>>>>> development
 
     @Override
     public BulkBan removeId(String id) {
@@ -25,7 +39,15 @@ public class BulkBanImpl implements BulkBan {
 
     @Override
     public String toString() {
+<<<<<<< HEAD
         return ids.toString();
+=======
+        StringBuilder builder = new StringBuilder();
+        builder.append("BulkBan{\n");
+       ids.forEach((s) -> builder.append(s + "\n"));
+        builder.append("}");
+        return builder.toString();
+>>>>>>> development
     }
 
     @Override

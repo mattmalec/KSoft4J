@@ -1,7 +1,6 @@
 package net.explodingbush.ksoftapi.entities.impl;
 
 import net.explodingbush.ksoftapi.entities.Ban;
-import net.explodingbush.ksoftapi.exceptions.NotFoundException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -24,17 +23,17 @@ public class BanImpl implements Ban {
 
     @Override
     public long getId() {
-        return json.getLong("id");
+        return json.optLong("id");
     }
 
     @Override
     public String getName() {
-        return json.getString("name");
+        return json.optString("name");
     }
 
     @Override
     public int getDiscriminator() {
-        return Integer.parseInt(json.getString("discriminator"));
+        return Integer.parseInt(json.optString("discriminator"));
     }
 
     @Override
@@ -44,41 +43,41 @@ public class BanImpl implements Ban {
 
     @Override
     public long getModId() {
-    	if(json.isNull("moderator_id")){
-    		throw new NotFoundException("Moderator ID not found");
-    	}
-        return json.getLong("moderator_id");
+    	if(!json.has("moderator_id")) {
+            return 0L;
+        }
+        return json.optLong("moderator_id");
     }
 
     @Override
     public String getReason() {
-        return json.getString("reason");
+        return json.optString("reason");
     }
 
     @Override
     public String getProof() {
-        return json.getString("proof");
+        return json.optString("proof");
     }
 
     @Override
     public boolean isBanActive() {
-        return json.getBoolean("is_ban_active");
+        return json.optBoolean("is_ban_active");
     }
 
     @Override
     public boolean isAppealable() {
-        return json.getBoolean("can_be_appealed");
+        return json.optBoolean("can_be_appealed");
     }
 
 
     @Override
     public OffsetDateTime getTimestamp() {
-        return LocalDateTime.parse(json.getString("timestamp"), DateTimeFormatter.ISO_LOCAL_DATE_TIME).atOffset(ZoneId.systemDefault().getRules().getOffset(Instant.now()));
+        return LocalDateTime.parse(json.optString("timestamp"), DateTimeFormatter.ISO_LOCAL_DATE_TIME).atOffset(ZoneId.systemDefault().getRules().getOffset(Instant.now()));
     }
 
     @Override
     public boolean exists() {
-        return json.getBoolean("exists");
+        return json.optBoolean("exists");
     }
 
     @Override
@@ -88,7 +87,7 @@ public class BanImpl implements Ban {
 
     @Override
     public List<Ban> getBannedList() {
-        JSONArray array = json.getJSONArray("data");
+        JSONArray array = json.optJSONArray("data");
         List<Ban> banList = new ArrayList<>();
         for(Object o : array) {
             banList.add(new BanImpl(new JSONObject(o.toString())));
@@ -112,7 +111,27 @@ public class BanImpl implements Ban {
     }
 
     @Override
+    public String getAppealReason() {
+        if(json.optString("appeal_reason").isEmpty()) {
+            return null;
+        }
+        return json.optString("appeal_reason");
+    }
+
+    @Override
+    public OffsetDateTime getAppealDate() {
+        if(json.isNull("appeal_date")) {
+            return null;
+        }
+        return LocalDateTime.parse(json.optString("appeal_date"), DateTimeFormatter.ISO_LOCAL_DATE_TIME).atOffset(ZoneId.systemDefault().getRules().getOffset(Instant.now()));
+    }
+
+    @Override
     public String toString() {
-        return json.toString();
+        StringBuilder builder = new StringBuilder();
+        builder.append("Ban{\n");
+        json.toMap().forEach((s, o) -> builder.append(s + "=" + o + "\n"));
+        builder.append("}");
+        return builder.toString();
     }
 }

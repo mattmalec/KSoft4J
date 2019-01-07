@@ -41,33 +41,26 @@ public class AlbumImpl implements Album{
 
 	@Override
 	public Artist getArtist() {
-		int id = json.getJSONObject("artist").getInt("id");
-		if(id == -1){
-			JSONObject fakeArtist = new JSONObject()
-					.put("name", json.getString("artist"))
-					.put("albums", this)
-					.put("id", -1);
-			return new ArtistImpl(fakeArtist, cache);
-		}
-		if(cache.getArtistById(id) == null){
-			cache.addArtist(LyricUtil.retrieveArtistById(cache, id));
-		}
-		return cache.getArtistById(id);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public String getName() {
-		return json.getString("name");
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public int getReleaseYear() {
-		return json.getInt("year");
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
 	public int getId() {
-		return json.getInt("id");
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	public String toString() {

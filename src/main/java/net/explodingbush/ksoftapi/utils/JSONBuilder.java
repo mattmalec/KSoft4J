@@ -3,6 +3,7 @@ package net.explodingbush.ksoftapi.utils;
 import net.explodingbush.ksoftapi.enums.Routes;
 import okhttp3.*;
 import org.json.JSONArray;
+//import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.imageio.ImageIO;
@@ -48,8 +49,9 @@ public class JSONBuilder {
     public JSONObject requestKsoft(String url, String token) {
     	Checks.notNull(url, "url");
     	Checks.notNull(token, "token");
+    	String source = null;
         try {
-            String source = client.newCall(new Request.Builder().addHeader("Authorization", "Bearer " + token)
+            source = client.newCall(new Request.Builder().addHeader("Authorization", "Bearer " + token)
                     .url(url).addHeader("User-Agent", userAgent).build()).execute().body().string();
             return new JSONObject(source);
         } catch (IOException e) {

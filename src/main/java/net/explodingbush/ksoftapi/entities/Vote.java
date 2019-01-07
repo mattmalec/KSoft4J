@@ -2,6 +2,16 @@ package net.explodingbush.ksoftapi.entities;
 
 public interface Vote {
 
+<<<<<<< HEAD
+    String getType();
+    long getBotIdLong();
+    long getUserIdLong();
+    String getUserId();
+    String getBotId();
+    boolean getIsWeekend();
+    String getQuery();
+
+=======
     /**
      * The type of a DBL vote
      *
@@ -54,4 +64,5 @@ public interface Vote {
     @Override
     String toString();
 
+>>>>>>> development
 }

@@ -36,7 +36,11 @@ public class VoteImpl implements Vote {
     }
 
     @Override
+<<<<<<< HEAD
+    public boolean getIsWeekend() {
+=======
     public boolean isWeekend() {
+>>>>>>> development
         return json.getBoolean("isWeekend");
     }
 
@@ -44,6 +48,8 @@ public class VoteImpl implements Vote {
     public String getQuery() {
         return json.getString("query");
     }
+<<<<<<< HEAD
+=======
 
     @Override
     public String toString() {
@@ -53,4 +59,5 @@ public class VoteImpl implements Vote {
         builder.append("}");
         return builder.toString();
     }
+>>>>>>> development
 }

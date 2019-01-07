@@ -58,6 +58,8 @@ public class AlertImpl implements Alert {
     public String getURL() {
         return json.getString("uri");
     }
+<<<<<<< HEAD
+=======
 
     @Override
     public String toString() {
@@ -67,4 +69,5 @@ public class AlertImpl implements Alert {
         builder.append("}");
         return builder.toString();
     }
+>>>>>>> development
 }

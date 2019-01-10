@@ -110,7 +110,7 @@ public class RecommendationAction extends KSoftActionAdapter<Recommendation> {
         JSONArray tracksArray = new JSONArray();
         tracks.forEach(tracksArray::put);
         data.put("tracks", tracksArray).put("provider", provider.getType());
-        Response response = new JSONBuilder().recommendSongRequest(Routes.MUSICRECOMMEND, data, token);
+        Response response = new JSONBuilder().recommendSongRequest(Routes.MUSIC_RECOMMEND, data, token);
         if(response.code() == 500) {
             throw new NotFoundException("NANI broke something. Everything is currently being exploded");
         }

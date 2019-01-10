@@ -18,11 +18,20 @@ public class KumoAction {
     }
 
     /**
-     * Gets an IP action
+     * Gets a weather action
      *
      * @return A new {@link WeatherAction WeatherAction} instance.
      */
     public WeatherAction getWeatherAction() {
         return new WeatherAction(token);
+    }
+    
+    /**
+     * Gets a currency action
+     *
+     * @return A new {@link WeatherAction WeatherAction} instance.
+     */
+    public KCurrencyAction getCurrencyAction() {
+        return new KCurrencyAction(token);
     }
 }

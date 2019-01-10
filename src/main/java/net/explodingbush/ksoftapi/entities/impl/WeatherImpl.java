@@ -5,6 +5,8 @@ import net.explodingbush.ksoftapi.entities.Location;
 import net.explodingbush.ksoftapi.entities.Weather;
 import net.explodingbush.ksoftapi.enums.PrecipType;
 import net.explodingbush.ksoftapi.enums.ReportType;
+import net.explodingbush.ksoftapi.enums.Units;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -30,7 +32,17 @@ public class WeatherImpl implements Weather {
     public String getSummary() {
         return json.optString("summary");
     }
-
+    
+	@Override
+	public Units getUnits() {
+		try {
+			return Units.valueOf(json.getString("units"));
+		}
+		catch(Exception e) {
+			return Units.AUTO;
+		}
+	}
+	
     @Override
     public String getIcon() {
         return json.optString("icon");

@@ -3,7 +3,27 @@ package net.explodingbush.ksoftapi.enums;
 import java.util.Arrays;
 
 public enum ImageTag {
-    PEPE, DOGE, KAPPA, DAB, BIRB, DOG, FLOOFS, FBI, GLOMP, LICK, KISS, SMACK, SPANK, PAT, HUG, HENTAI_GIF, LEWD, NEKO, 
+	
+    PEPE, 
+    DOGE, 
+    KAPPA,
+    DAB, 
+    BIRB, 
+    DOG, 
+    FBI, 
+    LICK, 
+    KISS, 
+    SMACK, 
+    SPANK, 
+    PAT, 
+    HUG, 
+    HENTAI_GIF, 
+    LEWD, 
+    NEKO, 
+    @Deprecated
+    FLOOFS,
+    @Deprecated
+    GLOMP,
     @Deprecated
     CODE;
 	

@@ -19,13 +19,7 @@ public enum ImageTag {
     HUG, 
     HENTAI_GIF, 
     LEWD, 
-    NEKO, 
-    @Deprecated
-    FLOOFS,
-    @Deprecated
-    GLOMP,
-    @Deprecated
-    CODE;
+    NEKO;
 	
 	public boolean isNSFW(ImageTag tag) {
 		return Arrays.asList(NEKO, HENTAI_GIF, LEWD, LICK).contains(tag);

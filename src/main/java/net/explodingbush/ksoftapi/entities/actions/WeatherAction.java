@@ -104,7 +104,7 @@ public class WeatherAction extends KSoftActionAdapter<Weather> {
      */
     @Override
     public Weather execute() {
-        Response response = new JSONBuilder().requestKsoftResponse(String.format(Routes.KUMOWEATHER.toString(), reportType.toString().toLowerCase(), locationQuery, unit, language), token);
+        Response response = new JSONBuilder().requestKsoftResponse(String.format(Routes.KUMO_WEATHER.toString(), reportType.toString().toLowerCase(), locationQuery, unit, language), token);
         if(response.code() == 500) {
             throw new NotFoundException("NANI broke something. Everything is currently being exploded");
         }

@@ -22,7 +22,7 @@ public class IPAction extends KSoftActionAdapter<IP> {
     /**
      * Sets the IP address to use
      * @param ipAddress
-     *  The IP address to use to execcute with
+     *  The IP address to use to execute with
      * @return IPAction instance. Useful for chaining.
      */
     public IPAction setIP(String ipAddress) {
@@ -39,7 +39,7 @@ public class IPAction extends KSoftActionAdapter<IP> {
      */
     @Override
     public IP execute() {
-        Response response = new JSONBuilder().requestKsoftResponse(String.format(Routes.KUMOIP.toString(), ip), token);
+        Response response = new JSONBuilder().requestKsoftResponse(String.format(Routes.KUMO_IP.toString(), ip), token);
         if(response.code() == 500) {
             throw new NotFoundException("NANI broke something. Everything is currently being exploded");
         }

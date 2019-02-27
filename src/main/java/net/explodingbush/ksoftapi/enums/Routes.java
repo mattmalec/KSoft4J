@@ -8,11 +8,15 @@ public enum Routes {
 	BAN_BULK("https://api.ksoft.si/bans/bulkcheck?more_info=yes"),
 	IMAGE("https://api.ksoft.si/images/random-image?tag=%s&nsfw=%s"),
 	WIKIHOW("https://api.ksoft.si/images/random-wikihow?nsfw=%s"),
-	REDDIT("https://api.ksoft.si/meme/"),
-	LYRICS("https://api.ksoft.si/lyrics/search?q=%s&text_only=%s&limit=%d"),
-	KUMOWEATHER("https://api.ksoft.si/kumo/weather/%s?q=%s&units=%s&lang=%s"),
-	KUMOIP("https://api.ksoft.si/kumo/geoip?ip=%s"),
-	MUSICRECOMMEND("https://api.ksoft.si/music/recommendations");
+	REDDIT("https://api.ksoft.si/images/"),
+	LYRICS_SEARCH("https://api.ksoft.si/lyrics/search?q=%s&text_only=%s&limit=%d"),
+	LYRICS_ARTIST("https://api.ksoft.si/lyrics/artist/%s/"),
+	LYRICS_TRACK("https://api.ksoft.si/lyrics/track/%s/"),
+	LYRICS_ALBUM("https://api.ksoft.si/lyrics/album/%s/"),
+	KUMO_WEATHER("https://api.ksoft.si/kumo/weather/%s?q=%s&units=%s&lang=%s"),
+	KUMO_CURRENCY("https://api.ksoft.si/kumo/currency?from=%s&to=%s&value=%.2f"),
+	KUMO_IP("https://api.ksoft.si/kumo/geoip?ip=%s"),
+	MUSIC_RECOMMEND("https://api.ksoft.si/music/recommendations");
 
 	  
 	private final String route;

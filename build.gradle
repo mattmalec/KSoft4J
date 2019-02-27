@@ -8,7 +8,7 @@ plugins {
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
-version properties.getProperty("library.version")
+version properties.getProperty("version")
 ext {
     bintrayRepo = 'KSoft4J'
     bintrayName = 'KSoft4J'
@@ -17,12 +17,12 @@ ext {
     libraryName = 'KSoft4J'
     artifact = 'KSoft4J'
 
-    libraryDescription = 'Java wrapper for the KSoftAPI'
+    libraryDescription = 'Official Java wrapper for the KSoftAPI'
 
     siteUrl = 'https://github.com/mjmalec/KSoft4J'
     gitUrl = 'https://github.com/mjmalec/KSoft4J.git'
 
-    libraryVersion = properties.getProperty("library.version")
+    libraryVersion = properties.getProperty("version")
 
     developerId = 'mjmalec'
     developerName = 'Matt Malec'
@@ -84,8 +84,8 @@ artifacts {
 }
 
 bintray {
-    user = properties.getProperty("bintray.user")
-    key = properties.getProperty("bintray.apikey")
+    user = properties.getProperty("user")
+    key = properties.getProperty("apikey")
 
     configurations = ['archives']
     pkg {

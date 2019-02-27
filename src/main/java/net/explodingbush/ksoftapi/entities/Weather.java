@@ -1,6 +1,7 @@
 package net.explodingbush.ksoftapi.entities;
 
 import net.explodingbush.ksoftapi.enums.PrecipType;
+import net.explodingbush.ksoftapi.enums.Units;
 
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -12,6 +13,7 @@ public interface Weather {
     String getSummary();
     float getTemperature();
     float getApparentTemperature();
+    Units getUnits();
     String getIcon();
     String getIconUrl();
     OffsetDateTime getSunriseTime();

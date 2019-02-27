@@ -5,13 +5,12 @@ import java.util.function.Consumer;
 
 public abstract class KSoftActionAdapter<T> implements KSoftAction<T> {
 
-
     /**
      * Executes the provided request asynchronously. This will not return any consumer.
      */
     @Override
     public void executeAsync() {
-       CompletableFuture.runAsync(this::execute);
+       this.executeAsync((result) -> {});
     }
 
     /**
@@ -26,10 +25,10 @@ public abstract class KSoftActionAdapter<T> implements KSoftAction<T> {
      */
     @Override
     public void executeAsync(Consumer<? super T> success) {
-        CompletableFuture<T> apple = CompletableFuture.supplyAsync(this::execute);
-        try {
-            success.accept(apple.get());
-        } catch (ExecutionException | InterruptedException ignored) {}
+    	this.executeAsync(success, (e) -> {
+    		System.err.println("An exception occured while making a request");
+    		e.printStackTrace();
+    	});
     }
     /**
      * Executes the provided request asynchronously.
@@ -44,11 +43,20 @@ public abstract class KSoftActionAdapter<T> implements KSoftAction<T> {
      */
     @Override
     public void executeAsync(Consumer<? super T> success, Consumer<? super Throwable> failure) {
-        CompletableFuture<T> apple = CompletableFuture.supplyAsync(this::execute);
-        try {
-            success.accept(apple.get());
-        } catch (Exception e) {
-            failure.accept(e);
-        }
+        CompletableFuture.supplyAsync(this::execute)
+        		.whenCompleteAsync((result, e) -> {
+        			try {
+            			if(e == null) {
+            				success.accept(result);
+            			}
+            			else {
+            				failure.accept(e);
+            			}
+        			}
+        			catch(Exception exception) {
+                 		System.err.println("A consumer threw an exception");
+                		exception.printStackTrace();
+        			}
+        		});
     }
 }
